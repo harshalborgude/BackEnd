@@ -1,0 +1,63 @@
+JPA Interview Questions
+
+
+1) What are the different types of entity mapping?
+	Following are the types of object-relational mapping: -
+
+	1) One-to-one mapping: The one-to-one mapping represents a single-valued association where an instance of one entity is associated with 
+		an instance of another entity. In this type of association, one instance of source entity can be mapped with at most one instance of 
+		the target entity.
+	2) One-To-Many mapping: The One-To-Many mapping comes into the category of collection-valued association where an entity is associated 
+		with a collection of other entities. In this type of association, the instance of one entity can be mapped with any number of 
+		instances of another entity.
+	3) Many-to-one mapping: The Many-To-One mapping represents a single-valued association where a collection of entities can be associated 
+		with the similar entity. In the relational database, more than one row of an entity can refer to the same row of another entity.
+	4) Many-to-many mapping: The Many-To-Many mapping represents a collection-valued association where any number of entities can be associated
+		 with a collection of other entities. In the relational database, more than one row of one entity can refer to more than one row of 
+		 another entity.
+		 
+2) What are the different types of identifier generation?
+	Following are the types of id generation strategy required to specify with @GeneratedValue annotation: -
+
+	1) Automatic Id generation - In this case, the application doesn't care about the kind of id generation and hand over this task to the 
+		provider. If any value is not specified explicitly, the generation type defaults to auto.
+	2) Id generation using a table - The identifiers can also be generated using a database table.
+	3) Id generation using a database sequence - Databases support an internal mechanism for id generation called sequences. To customize the 
+		database sequence name, we can use the JPA @SequenceGenerator annotation.
+	4) Id generation using a database identity - In this approach, whenever a row is inserted into the table, a unique identifier is assigned 
+		to the identity column that can be used to generate the identifiers for the objects.
+		
+3) What is an entity?
+	The entity is a group of states associated together in a single unit. An entity behaves as an object and becomes a major constituent of 
+	the object-oriented paradigm. In other words, we can say that an entity is an application-defined object in the Java Persistence Library. 
+	Each entity is associated with the metadata which represents its information in the form of XML or annotation.
+	
+4) What are the properties of an entity?
+	Following are the properties of an entity that an object must have: -
+
+	1) Persistability: An object is called persistent if it is stored in the database and can be accessed anytime.
+	2) Persistent Identity: In Java, each entity is unique and represents an object identity. Similarly, when the object identity is stored 
+		in a database, then it is represented as persistence identity. This object identity is equivalent to the primary key in the database.
+	3) Transactionality: In Java, each entity is unique and represents an object identity. Similarly, when the object identity is stored in 
+		a database, then it is represented as persistence identity. This object identity is equivalent to the primary key in the database.
+	4) Granularity: Entities should not be primitives, primitive wrappers or built-in objects with single dimensional state.
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
+
+
+
+

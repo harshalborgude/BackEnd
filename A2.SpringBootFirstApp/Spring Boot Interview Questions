@@ -1,0 +1,145 @@
+Spring Boot Interview Questions
+
+1) What is Spring Boot?
+	Spring Boot is a Spring module which provides RAD (Rapid Application Development) feature to Spring framework.
+	It is used to create stand alone spring based application that you can just run because it needs very little spring configuration.
+	
+2) What are the advantages of Spring Boot?
+	- Create stand-alone Spring applications that can be started using java -jar.
+	- Embed Tomcat, Jetty or Undertow directly. You don't need to deploy WAR files.
+	- It provides opinionated 'starter' POMs to simplify your Maven configuration.
+	- It automatically configure Spring whenever possible.
+	- It provides production-ready features such as metrics, health checks, and externalized configuration.
+	- There is no requirement for XML configuration.
+	- It increases productivity and reduces development time.
+	
+3)	Limitations of Spring Boot
+	- Spring Boot can use dependencies that are not going to be used in the application. These dependencies increase the size of the application.
+
+4) Prerequisite of Spring Boot
+	To create a Spring Boot application, following are the prerequisites. In this tutorial, we will use Spring Tool Suite (STS) IDE.
+
+	1) Java 1.8
+	2) Maven 3.0+
+	3) Spring Framework 5.0.0.BUILD-SNAPSHOT
+	4) An IDE (Spring Tool Suite) is recommended.
+	
+5) Spring Boot Features
+	- Web Development
+	- SpringApplication
+	- Application events and listeners
+	- Admin features
+	- Externalized Configuration
+	- Properties Files
+	- YAML Support
+	- Type-safe Configuration
+	- Logging
+	- Security	
+	
+6) How to create Spring Boot application?
+	There are multiple approaches to create Spring Boot project. We can use any of the following approach to create application.
+
+	- Spring Maven Project	- https://www.javatpoint.com/spring-maven-project
+	- Spring Starter Project Wizard
+	- Spring Initializr
+	- Spring Boot CLI
+	
+7) What is Spring Boot dependency management?
+	Spring Boot manages dependencies and configuration automatically. You don't need to specify version for any of that dependencies.
+	Spring Boot upgrades all dependencies automatically when you upgrade Spring Boot.
+	
+8) What is Spring Boot Actuator?
+	Spring Boot provides actuator to monitor and manage our application. Actuator is a tool which has HTTP endpoints. when application is 
+	pushed to production, you can choose to manage and monitor your application using HTTP endpoints.
+	
+9) How to connect Spring Boot to the database using JPA?
+	Spring Boot provides spring-boot-starter-data-jpa starter to connect Spring application with relational database efficiently. You can 
+	use it into project POM (Project Object Model) file.
+	
+10) Spring Vs Spring Boot?
+	Spring is a web application framework based on Java. It provides tools and libraries to create a complete cutomized web application.
+	Wheras Spring Boot is a spring module which is used to create spring application project that can just run.
+	
+
+11) Annotations :
+	@RequestMapping: It is used to map the web requests. It has many optional elements like consumes, header, method, name, params, path, 
+					produces, and value. We use it with the class as well as the method.
+	@GetMapping: It maps the HTTP GET requests on the specific handler method. It is used to create a web service endpoint that fetches It is
+					used instead of using: @RequestMapping(method = RequestMethod.GET)
+	@PostMapping: It maps the HTTP POST requests on the specific handler method. It is used to create a web service endpoint that creates It 
+					is used instead of using: @RequestMapping(method = RequestMethod.POST)
+	@PutMapping: It maps the HTTP PUT requests on the specific handler method. It is used to create a web service endpoint that creates or 
+					updates It is used instead of using: @RequestMapping(method = RequestMethod.PUT)
+	@DeleteMapping: It maps the HTTP DELETE requests on the specific handler method. It is used to create a web service endpoint that 
+					deletes a resource. It is used instead of using: @RequestMapping(method = RequestMethod.DELETE)
+	@PatchMapping: It maps the HTTP PATCH requests on the specific handler method. It is used instead of using: 
+					@RequestMapping(method = RequestMethod.PATCH)
+	@RequestBody: It is used to bind HTTP request with an object in a method parameter. Internally it uses HTTP MessageConverters to 
+				convert the body of the request. When we annotate a method parameter with @RequestBody, the Spring framework binds the 
+				incoming HTTP request body to that parameter.
+	@ResponseBody: It binds the method return value to the response body. It tells the Spring Boot Framework to serialize a return an object
+				 into JSON and XML format.
+	@PathVariable / @PathParam : It is used to extract the values from the URI. It is most suitable for the RESTful web service, where the URL contains a 
+				path variable. We can define multiple @PathVariable in a method.
+				@controller : @PathVariable
+				@RestController : @PathParam
+	@RequestParam: It is used to extract the query parameters form the URL. It is also known as a query parameter. It is most suitable for 
+				web applications. It can specify default values if the query parameter is not present in the URL.
+	@RequestHeader: It is used to get the details about the HTTP request headers. We use this annotation as a method parameter. The optional
+				 elements of the annotation are name, required, value, defaultValue. For each detail in the header, we should specify separate annotations. We can use it multiple time in a method
+	@RestController: It can be considered as a combination of @Controller and @ResponseBody annotations. The @RestController annotation is 
+				itself annotated with the @ResponseBody annotation. It eliminates the need for annotating each method with @ResponseBody.
+	@RequestAttribute: It binds a method parameter to request attribute. It provides convenient access to the request attributes from a 
+				controller method. With the help of @RequestAttribute annotation, we can access objects that are populated on the server-side.
+
+	------------------
+	1) @SpringBootApplication - Spring boot application startes with this annotated class.
+			@EnableAutoConfiguration, 
+			@ComponentScan and 
+			@SpringBootConfiguration
+	2) @RestController - define that class as controller  - use @PathParam
+		- IT is important annotation to implement a restfull API.
+		- It's a convenient annotation that combines @Controller and @ResponseBody, which eliminates the need to annotate every request handling
+			 method of the controller class with the @ResponseBody annotation.
+		- @ResponseBody. This annotation enables automatic serialization of the return object into the HttpResponse.
+		- Every request handling method of the controller class automatically serializes return objects into HttpResponse.
+
+	3) @RequestMapping - map request with that class with defined name
+	4) @Service - This service annotated class will be treated as a service.
+	5) @PathVariable - To specify variable is taken from url path.
+	6) @RequestBody - to get body in POST request and convert it into required format/object
+	7) @Autowired - To inject object of perticular class.
+	8) @Controller - this is just a cotroller , dont means a rest controller. - use @PathVariable
+		- @Controller is used to mark classes as Spring MVC Controller.
+
+	9) @LoadBalence
+	
+	-------------------------------------------------
+	Spring JPA
+	
+	1) @Entity - This class considered as a table through spring JPA
+	2) @Table(name="tName") - table name is given by this annotation
+	3) @Id - primary key is marked with this annotation.
+	4) @Column(name="id") - column name and variable mapping is done through this annotation.
+	    ( if name of clmn and variable name is same then providing name is optional ) 
+	5)  @GeneratedValue(strategy=GenerationType.AUTO) - auto increament value of id using hibernate entity
+
+
+12) Actuator :
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

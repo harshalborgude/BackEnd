@@ -1,0 +1,71 @@
+Junit Notes 
+
+* It uses 2 jars , Junit4.jar , hamcrest-core.jar  to be placed in referenced libraries
+* Go to properties -> libraries -> class path -> add external jars -> select above 2 jars and will be added as Referened Libraries.
+
+
+1) Create a simple maven project
+2) write a code and classes
+3) click on class and select "junit test case" 
+4) enter same package name , select junit version -> next -> select method to be tested
+
+5) @Test is most imp annotation which represents junit test case, which enables junit to test
+	- this annotation enable to junit to test the method and use perticular method to test.
+	- this annotation provide us the methods to test.
+	- when we run project with junit then all the methods with @Test annotation will be ran and will test all the test cases.
+	- also will get the trace of what gone wrong.
+6) while passing the message in test cases , try passing with lamda expression as it improves speed of running test cases.
+7) every time for each test , separate instance of test class is get created , so to avoid that 
+	- @TestInstance(Lifecycle.PER_METHOD)
+8) using assert all , we can execute multiple test cases at a time.
+9) assuemTrue - if condition within is true then only statements after it gets executed.
+10) to run specific methods with tags, add tags in class and then while running add run configurations-> include exclude tags.
+11) tags can be of class level tags , can include exclude method or classes with tags. 
+12) lazy message :
+	assertEquals(expected, result,"addition operation failed!");
+	- here this message is builded and take consume milis even if not getting printed so
+	- to build it while only in failure can make it lazy message using lambda expression.
+	assertEquals(expected, result,()->"addition operation failed!");
+	- this change can benifit in fast testing.
+
+-----------
+Junit hooks 
+1) @BeforeAll - get executed before each and every method in the call. 
+2) @AfterAll - get executed after every method in the class.used to clean up things.
+3) @BeforeEach - before every method call.
+4) @AfterEach - after every method call.
+
+
+
+
+5) @TestInstance(Lifecycle.PER_METHOD) - restricst instance creation per method.
+6) @DisplayName("assert all example") - can provide name with the help of this annotation.
+7) @Disabled - using this we can disable the test case
+8) @Tag("runIt") - using tag annotation , we can run method with perticular tag.
+9) @RepeatedTest(5) - using this annotation , this perticular test is get executed 5 times, used for repeated testing.
+
+
+
+
+Q. before all v/s before each , after all and after each difference.
+
+------------------------------------------
+Maven surefire
+
+1) to run the maven test option to test junit test cases with maven , it need surefire plugin.then it will show test results on console.
+2) whenever we build the project then first maven test part tested first and if all test cases are sucessfull then only it builds the project.
+2) search surefire-plugin studyeasy.org see pom and get below lines from it.
+	<properties>
+		<surefire.version>3.0.0-M3</surefire.version>
+	</properties>
+	// after dependencies
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>${surefire.version}</version>
+			</plugin>
+		</plugins>
+	</build>
+2) 

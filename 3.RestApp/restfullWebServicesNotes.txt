@@ -1,0 +1,36 @@
+	RestFull web services 
+=================================================================
+
+1) two types of API : SOAP and REST , soap was old one and rest is new one ,
+	soap supports only xml based data communication , rest supports json,xml,text any type of comunication.
+2) Types of HTTP methods : GET , POST , PUT , DELETE
+3) HTTP status codes : 200ok , 404 not found , 500 internal server error.
+	1xx : Informational - request is recieved & process is continued. (100-server have recieved the request header and client should proceed for body ,
+		102- server has recieved the request and processing the request)
+	2xx : Successfull - successfully recieved , understood , and accepted the request. (200 ok - standard response for successful HTTP request)
+	3xx : Redirectional - further action need to be taken to complete the request.
+	4xx : Client Error - request contains bad syntax or cannot be fulfilled. (403 Forbidden - request was valid but server is refusing - unauthorised ,
+		404 Not Found - the requested resources could not be found but may be available in future)
+	5xx : Server Error - server failed to fulfill an valid request. ( 500 Internal server error - generic server errorr msg , 503 service unavailable)
+4) Types of URI's :
+	i)   File based URI - travel.com/goa.html , travel.com/vegas.html
+	ii)  Resource based links - travel.com/cities/{city_id}
+	iii) Filter based URI's - travel.com/cities/startwith=m  , travel.com/cities/offset=25&limit=50
+
+5) URI relationships : travel.com/countries/india/cities - here proper flow and relation is maintained
+	- travel.com/cities/{id} - this kind of uri dont have proper relationship.
+6) for update operation always use PUT method.
+  - for Create operation use POST method.
+7) Properties of RESTfull API :
+   - URI
+   - HTTP method 
+   - HATEOAS capability.
+8) Richardsons maturity model : this depends upon implementation of above properties
+	- level 0 : not restfull
+	- level 1/2 : partially restfull
+	- level 3 : Fully restfull
+9) Popular JAX-RS rest api implementation provider :
+	- jersey
+	- RESTeasy
+	- Apache CFX
+	- Restlet

@@ -1,0 +1,41 @@
+To implement maven project using spring boot 
+
+1) create maven project -> skip archetype selection (select this option)
+2) Add group id as classpath for the project and artifactId as project name, dont feel anything in parent option ,and create project.
+3) search -> "spring boot starter maven project" -> Developing your first Spring Boot application -> docs.spring.io
+			or 
+			org.studyeasy/spring-boot-starter
+
+3) copy parent dependency to created pom file (given below) , in dependency add below dependencies- starter web ,starter test and spring boot 
+	maven plugin under build option:
+	<parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.1.4.RELEASE</version>
+    </parent>
+    
+4) Adding classpath dependencies : 
+	 <dependencies>
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-web</artifactId>
+	    </dependency>
+	</dependencies>
+	
+5) Create One main class , annotate that class with @SpringBootApplication annotation.
+	- inside main methode write ,
+	SpringApplication.run(className.class,args);
+	
+	1. This SpringApplication.run() line loads the defaults.
+	2. Starts the spring boot app
+	3. performs the class path scan - when app is started then spring boot will scan all the classes and paths
+		if @controller annotation is there then will consider that class as controller
+	4. starts local tomcat - This 4 things are taken care by Spring boot
+	
+6) Controller class can be annotated with @RestController , this class will be considered as controller class and mapping methods can provided here
+7) @RequestMapping("/Name") or @RequestMapping(method=RequestMethod.PUT,value="/posts/{id}") this way we can write mapping.
+8) @GetMapping("/name") ,@PostMapping("/name") ,@PutMapping("/name") ,@DeleteMapping("/name")
+9) input paramteres can be taken with input parameters to the mapped methods. (@RequestBody("post") Post post) ,(@PathVariable("id") int id)
+10)any object , json , plain text , string can be return as reponse. 
+
+    

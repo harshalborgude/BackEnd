@@ -1,0 +1,77 @@
+Microservices Interview Questions
+
+
+1) How microservices communicate with each other ?
+	a) Using "RestTemplate" :
+	- With the help of rest template we can invoke any rest service.
+	- RestTemplate have method "exchange" through which we can call another microservice
+		RestTemplate.exchange( URL , HttpMethod.GET , null , String.class (expectedOutFormat) )
+		RestTemplate.exchange( URL , HttpMethod.POST , dataObj , String.class (expectedOutFormat) )
+		
+		--------------------------------------------------------------------------------------------
+		// inside microservice 1
+		@Bean 
+		public RestTemplate getRestTemplate(){
+			return new RestTemplate();
+		}
+
+		@Autowired
+		RestTemplate restTemplate;
+		
+		@RequestMapping("/")
+		public String home(){
+			JSONObject json = new JSONObject();
+			json.put("message","Hello world!");
+			
+			JSONObject jsonObj = new JSONObject(restTemplate.exchange(
+											"https://localhost:4343",
+											HttpMethod.GET,
+											null,
+											String.class).getBody());
+			
+			json.put("message from another microservice",jsonObj);
+			
+			return json.toString();
+		}
+		--------------------------------------------------------------------------------------------
+		
+	- This above way , one microservice can communicate with other , If second microservice is not available then it will give "Unable to connect Error"
+
+	a) Using "WebClient" :
+		
+		
+		WebClient.builder webClientBuilder = WebClient.builder();
+		
+		String response = webClientBuilder.build()									// building instance of webClientBuilder
+											.get()									// get request
+											.uri("https://localhost:4343")			// target url
+											.retrieve();							// with this it will retrieve data asynchronously
+											.bodyToMono(String.class)				// convert response to given classl, mono means promise
+											.block();								// blocking execution till mono returns the data.
+			
+		
+2) How loadbalencing takes place in microservices?
+	- We register our services to registry server , for that we are making use of @EnableEurekaCLient
+	- Whenever we are getting requests from other services or clients , then we have to use @LoadBalence annotation to at bean for loadbalencing.
+	- So here , let's say our 2 services are registered with eureka , running on different port and 3rd service trying to call 1/2 service.
+	- in call of RestTemplate url , it will use service name as register in eureka , not hardcoded ip and port.
+	- So 3rd service will use that name , and it get the available services and internally it will make call to any of them because of @LoadBalence
+		so this annotation does loadbalencing internally.
+	- This is client side load balencing , so client does load balencing automatically.
+		
+3) 3) HTTP status codes : 200ok , 404 not found , 500 internal server error.
+	1xx : Informational - request is recieved & process is continued. 
+			100-server have recieved the request header and client should proceed for body ,
+			102- server has recieved the request and processing the request
+	2xx : Successfull - successfully recieved , understood , and accepted the request. 
+			200 ok - standard response for successful HTTP request
+	3xx : Redirectional - further action need to be taken to complete the request.
+	4xx : Client Error - request contains bad syntax or cannot be fulfilled. 
+			403 Forbidden - request was valid but server is refusing - unauthorised ,
+			404 Not Found - the requested resources could not be found but may be available in future
+	5xx : Server Error - server failed to fulfill an valid request.  
+			500 Internal server error - generic server errorr msg , 
+			503 service unavailable
+		
+		
+		

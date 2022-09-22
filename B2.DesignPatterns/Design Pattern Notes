@@ -1,0 +1,74 @@
+Design Patterns :
+
+A) Creational Design Patterns :
+	1) Singleton* - to create singleton object.
+	2) Factory* - a class is used to get the object of class, That is called as Factory of Objects
+	3) Abstract Factory
+	4) Builder
+	5) Prototype
+	
+B) Structural :
+	6) Adapter 
+	7) Composite
+	8) Proxy*
+	9) Fly Weigh 
+	10) Facade
+	11) Bridge
+	12) Decorator
+	
+	
+C) Behavioural :
+	13) Template Method*
+	14) Mediator
+	15) Chain Of Responsibility
+	16) Observer
+	17) Strategy
+	18) Command
+	19) State
+	20) Visitor
+	21) Iterator
+	22) Interpreter
+	23) Memento
+
+===============================================================================================================================================
+1) Singleton Design Pattern : https://www.baeldung.com/spring-framework-design-patterns
+
+	- The singleton pattern is a mechanism that ensures only one instance of an object exists per application.
+	- This pattern can be useful when managing shared resources or providing cross-cutting services, such as logging.
+	- multiple objects of the same class can exist in a single application if we have multiple containers.
+	- By default, Spring creates all beans as singletons.
+
+===============================================================================================================================================
+2) Factory Design Pattern :
+	- In this pattern we are not exposing class names to create it's object , we are getting object by passing some strings to 
+		OperatingSystemFactory's Object , and that Factory Objects created Objects for us using some strings or method's
+	- How it is creating objects internally it is totally hidden from us , This pattern called as "Factory Design Pattern"
+	- In Factory pattern,we create object without exposing the creation logic to client and refer to newly created object using a common interface
+
+	Implementation: 
+		- Define a factory method inside an interface. 
+		- Let the subclass implements the above factory method and decides which object to create. 
+		- In Java, constructors are not polymorphic, but by allowing subclass to create an object, we are adding polymorphic behavior to the 
+			instantiation. In short, we are trying to achieve Pseudo polymorphism by letting the subclass to decide what to create, and so this 
+			Factory method is also called a virtual constructor. 
+
+	Real-time examples of Java:
+
+		This design pattern has been widely used in JDK, such as :
+		1. getInstance() method of java.util.Calendar, NumberFormat, and ResourceBundle uses factory method design pattern. 
+		2. All the wrapper classes like Integer, Boolean etc, in Java uses this pattern to evaluate the values using valueOf() method. 
+		3. java.nio.charset.Charset.forName(), java.sql.DriverManager#getConnection(), java.net.URL.openConnection(), java.lang.Class.newInstance(),
+			 java.lang.Class.forName() are some of their example where factory method design pattern has been used.
+
+
+
+
+
+
+
+
+
+
+
+
+

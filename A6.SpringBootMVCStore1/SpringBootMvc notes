@@ -1,0 +1,14 @@
+Spring boot mvc project
+
+1) we have to add html pages by ourselves, /src/main (below one )-> webapp/view 
+2) under view create new html page.
+
+
+
+----------------------------------------
+
+1) spring.jpa.hibernate.ddl-auto=update - update serves create and update both features.
+2) url for spring boot application will be : http://localhost:8080/<url_pattern>
+	no any further path will be there as server is inbuilt in this application.url will be based on base url.
+3) server.servlet.context-path=/store - using this property we can change default context path of the application
+	previously it was - http://localhost:8080/ but after adding this property it became http://localhost:8080/store/

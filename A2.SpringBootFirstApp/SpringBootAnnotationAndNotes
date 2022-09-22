@@ -1,0 +1,49 @@
+Spring boot annotation and notes 
+
+1) @SpringBootApplication - Spring boot application startes with this annotated class.
+2) @RestController - define that class as controller  - use @PathParam
+	- IT is important annotation to implement a restfull API.
+	- It's a convenient annotation that combines @Controller and @ResponseBody, which eliminates the need to annotate every request handling
+		 method of the controller class with the @ResponseBody annotation.
+	- @ResponseBody. This annotation enables automatic serialization of the return object into the HttpResponse.
+	- Every request handling method of the controller class automatically serializes return objects into HttpResponse.
+
+3) @RequestMapping - map request with that class with defined name
+4) @Service - This service annotated class will be treated as a service.
+5) @PathVariable - To specify variable is taken from url path. (Controller)
+   @PathParam - (RestController)
+6) @RequestBody - to get body in POST request and convert it into required format/object
+7) @Autowired - To inject object of perticular class.
+8) @Controller - this is just a cotroller , dont means a rest controller. - use @PathVariable
+	- @Controller is used to mark classes as Spring MVC Controller.
+
+9) @LoadBalence - to do client side load balancing , it itself perform client side load balencing if @EnableEurekaClient is there.
+
+
+-------------------------------------------------
+Spring JPA
+
+1) @Entity - This class considered as a table through spring JPA
+2) @Table(name="tName") - table name is given by this annotation
+3) @Id - primary key is marked with this annotation.
+4) @Column(name="id") - column name and variable mapping is done through this annotation.
+    ( if name of clmn and variable name is same then providing name is optional ) 
+5)  @GeneratedValue(strategy=GenerationType.AUTO) - auto increament value of id using hibernate entity
+
+
+
+-------------------------------------------------
+
+1) Web service : a service on web for a machine consumption(software level communication).
+2) Micro service : a micro service is a independant service within an application.
+3) CRUD operation - creat , read , update , delete
+4) public interface myRepo extends CrudRepository<T, ID> - T : entity class - Post , ID : primary key data type - Integer
+5) we dont need to implement any business logic inside this class for any CRUD operation , just by using object of this class and can 
+	do operation with that.
+6) Providing default constructor is compulsory for entity class otherwise it will create a exception.
+7) save method will update the record if id already present otherwise it will create new row
+8) spring.jpa.hibernate.ddl-auto=update - update serves create and update both features.
+9) url for spring boot application will be : http://localhost:8080/<url_pattern>
+	no any further path will be there as server is inbuilt in this application.url will be based on base url.
+10) Devtool - is the dependency added while creating a spring boot project,it helps in development.
+	- using this devtool feature , whatever change we made in code just reflects directly without rerunning the application.

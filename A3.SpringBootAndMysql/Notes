@@ -1,0 +1,14 @@
+DB : user password : mysql : root/harshal
+
+1) Spring JPA - java persistent object.
+2) Spring jPA with mysql
+3) spring.datasource.url=jdbc:mysql://localhost:3306/blog?useSSL=false
+	- here adding "?useSSL=false" will disable use of SSL
+4) spring.jpa.hibernate.ddl-auto=create
+   spring.datasource.url=jdbc:mysql://localhost:3306/blog?useSSL=false
+   spring.datasource.username=root
+   spring.datasource.password=harshal	
+   
+   using only this 4 line , spring application will be able to connect with database
+5)   spring.jpa.hibernate.ddl-auto=create ( none, update, create, or create-drop) 
+	- create will create a db every time and and update will update db as per entity class

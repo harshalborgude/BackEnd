@@ -1,0 +1,25 @@
+How to add Maven project for restApp
+********** WAY 1 ******************
+1) search jersey implementation and get below details for implementation 
+	mvn archetype:generate -DarchetypeGroupId=org.glassfish.jersey.archetypes \
+    -DarchetypeArtifactId=jersey-quickstart-grizzly2 -DarchetypeVersion=3.0.3
+2) here , GroupId : org.glassfish.jersey.archetypes
+		  ArtifactId : jersey-quickstart-grizzly
+		  Version : 3.0.3
+		  
+3) Then select "maven-archType-webapp" 
+4) then add GroupId -> package name 
+			ArtifactId -> project name 
+
+5) need to add the dependency for jersey implementation now.
+6) search for "jersey implementation bundle maven " -> "Jersey Bundles " jar -> get the dependency code and add in pom
+7) get moxy dependency code "moxy" -> this jar is used to convert object to maven.
+8) change java version if needed.
+9) Error in jsp page : The superclass "jakarta.servlet.http.HttpServlet" was not found on the Java Build Path
+10) soln : build path -> add library -> server runtime -> server version -> apply
+
+********** WAY 2 ( Alternative way ) **********************
+
+1) in above add ApplicationConfig class -> @ApplicationPath("JAXRS")
+2) search "jersey RI bundle maven" -> add dependecy
+3) Uri will : http://localhost:8080/RestApp2/JAXRS/getMyApp

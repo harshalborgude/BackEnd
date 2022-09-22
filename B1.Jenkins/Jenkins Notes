@@ -1,0 +1,37 @@
+Jenkins 
+
+1) What is continous integration - CI / Continous delievery - CD
+	It is a development practice , in which developers are required to commit changes to source code in a shared repository several time a day.
+	Every commit is then build and this allows the team to detect problems early.
+
+2) what does CI really mean ?
+	1) Integrated - all changes up until that point are combined into the project.
+	2) Built - The code is compile into an executable or package.
+	3) Tested - Automated test suits are run.
+	4) Deployed - Loaded onto the system where developers can interact with it.
+	
+3) CI benefits ?
+	1) Immediate bug detection.
+	2) No integration steps in the lifecycle.
+	3) A deployable system at any given point.
+	4) record of evolution of project.
+	
+	- code repositories : svn , git
+	- continous build system : jenkins , bamboo , cruise control
+	- test framework - Junit , cucumber
+	- build tools - maven , gradle.
+
+- Jenkins is leading open source continous integration tool. only java 8 and 11 seported by jenkins yet.
+
+-----------------------------
+
+Installation
+
+1) download and installer jenkins for windows. - java 8 or 11 should be there
+2) can change jenkins configurations in jenkins.xml folder , it will be in installation folder ( C:\Program Files\Jenkins )
+3) start jenkins using : java -jar Jenkins.war --httpPort=8181
+	password : aae663a3eb57495f8328677e65dd4cf2
+	
+	jenkins url : http://localhost:8181/
+
+

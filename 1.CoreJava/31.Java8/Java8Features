@@ -1,0 +1,35 @@
+
+
+1) Java 8 Date/Time API (Java 8)
+2) Lambda Expressions (Java 8)
+3) Method References (Java 8)
+4) Functional Interfaces (Java 8)
+5) Stream (Java 8) - collections , array , input output sources.
+	- where have to deal with large data to sort , map , filter etc , then stream api can be used.
+	- parallelStream will use multiple threads to do that task.
+	
+6) Base64 Encode Decode (Java 8)
+7) Default Methods (Java 8)
+8) forEach method(Java 8)
+9) Collectors(Java 8)
+10) StringJoiner(Java 8)
+11) Optional class (Java 8)
+12) Nashorn JavaScript (Java 8)
+13) Parallel Array Sorting (Java 8)
+14) Type Inference (Java 8)
+15) Method Parameter Reflection (Java 8)
+16) Type annotations and repeating annotations (Java 8)
+17) Java JDBC Improvements (Java 8)
+18) Java IO Improvement (Java 8)
+19) Java Concurrency Improvement (Java 8)
+
+
+--------------------------------------------------------
+Performance of stream api's
+
+1) map and filters are called as a lazy functions.they uses lazy evaluation.
+2) so after stream function converting all element into stream , it will passes to other functions.
+3) map and filter will do it's task when they get any terminal method like find first.
+4) so in process after filter , map , if it gets firstFirst() method , then map will start mapping elements and filter
+	will start filtering elements.so in this way performance is optimized by doing lazy evaluation.
+	when asked for final result then this method will do its task according to requirement.

@@ -1,0 +1,10 @@
+###This is the demo file , created by File Writting Program!
+
+
+harshal
+i dont know
+this is my program
+i will finish core java now
+i left with 2 topics
+then i will start
+servlets and jsp's

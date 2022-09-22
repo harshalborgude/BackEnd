@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-16">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" path="30.MultiThreading"/>
+	<classpathentry kind="src" path="29.LambdaExpression"/>
+	<classpathentry kind="src" path="28.FileHandling"/>
+	<classpathentry kind="src" path="1.Loops"/>
+	<classpathentry kind="src" path="2.Methods"/>
+	<classpathentry kind="src" path="3.Classes"/>
+	<classpathentry kind="src" path="4.Inheritance"/>
+	<classpathentry kind="src" path="5.Composition"/>
+	<classpathentry kind="src" path="6.Encapsulation"/>
+	<classpathentry kind="src" path="7.Polymorphism"/>
+	<classpathentry kind="src" path="8.Interfaces"/>
+	<classpathentry kind="src" path="9.AbstractClasses"/>
+	<classpathentry kind="src" path="10.UserInput"/>
+	<classpathentry kind="src" path="11.StaticElements"/>
+	<classpathentry kind="src" path="12.Final"/>
+	<classpathentry kind="src" path="13.Packages"/>
+	<classpathentry kind="src" path="14.ScopInJava"/>
+	<classpathentry kind="src" path="15.AccessModifier"/>
+	<classpathentry kind="src" path="16.ExceptionHandling"/>
+	<classpathentry kind="src" path="17.Enum"/>
+	<classpathentry kind="src" path="18.Array"/>
+	<classpathentry kind="src" path="19.CallByValueAndReference"/>
+	<classpathentry kind="src" path="20.ArrayList"/>
+	<classpathentry kind="src" path="21.Stack"/>
+	<classpathentry kind="src" path="22.LinkedList"/>
+	<classpathentry kind="src" path="23.Set"/>
+	<classpathentry kind="src" path="24.Map"/>
+	<classpathentry kind="src" path="25.Queue"/>
+	<classpathentry kind="src" path="Stock"/>
+	<classpathentry kind="src" path="26.GarbageCollection"/>
+	<classpathentry kind="src" path="27.Comparator"/>
+	<classpathentry kind="src" path="31.Java8"/>
+	<classpathentry kind="src" path="32.SingletonAndSerialization"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

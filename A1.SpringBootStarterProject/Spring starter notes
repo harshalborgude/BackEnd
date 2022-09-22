@@ -1,0 +1,22 @@
+To implement maven project using spring boot 
+
+1) create maven project -> skip archetype selection -> enter first groupid and artifact and create the project
+
+2) search -> "spring boot starter maven project" -> Developing your first Spring Boot application -> docs.spring.io
+			or 
+			org.studyeasy/spring-boot-starter
+3) copy parent node from pom :
+	<parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.1.4.RELEASE</version>
+    </parent>
+    
+4) Adding classpath dependencies :
+	 <dependencies>
+	    <dependency>
+	        <groupId>org.springframework.boot</groupId>
+	        <artifactId>spring-boot-starter-web</artifactId>
+	    </dependency>
+	</dependencies>
+    

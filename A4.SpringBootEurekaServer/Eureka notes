@@ -1,0 +1,68 @@
+Eureka server and client
+
+1) Eureka is used for load balencing purpose - study and write
+2) client side service discovery - Eureka 
+   server side service discovery - AWS , NGINX
+   
+3) To create eureka server 	
+	- create spring boot startor project 
+	- add eureka server dependency or eureka client dependency for creating eureka client
+4) @EnableEurekaServer - This annotation will enable eureka server.
+5) default port for eureka server is - 8761   , we can change port with some extra configurations.
+6) Prevent eureka server itself to prevent registering on own server
+	- eureka.client.register-with-eureka=false
+    - eureka.client.fetch-registry=false 
+    - logging.level.com.netflix.eureka=OFF
+    - logging.level.com.netflix.discovery=OFF
+    
+ Q. diff between @PathParam and @PathVariable
+ Q. RestTemplate - study in details , will be usefull
+ Q. Why uri is not getting replaced from eureka?
+ 
+ ----------------------------------------
+ Eureka client register into eureka server
+ 
+ 1) Open pom.xml of eureka client spring boot application(can create eureka client spring boot app to just get pom)
+ 2) copy Spring cloud property : <spring-cloud.version>2021.0.0</spring-cloud.version>
+ 	- add this property of eureka client into pom of microservice1 property field.
+3) copy dependency from eureka client pom to microservice1 pom.
+	- spring-cloud-starter-netflix-eureka-client
+	- spring-boot-starter-test
+	
+	<dependencies>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+4) Copy dependency management whole thing into eureka client microservice 1 and paste after dependecy tab.
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>${spring-cloud.version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+	
+5) using this things , app will register into eureka as a client.
+	- can register n number of clients by following this steps
+	- can give name to client using name property in property file.
+	
+6) By replacing eureka registed name inside	another microservice will get proper URI from eureka
+7) For load balencing purpose we can create a bean with @LoadBalence annotation.
+6) no need of adding any annotation for eureka client.
+7) dead applications can be there registered into eureka and can get rid from them by some changes(search)
+
+
+ 
+ 
