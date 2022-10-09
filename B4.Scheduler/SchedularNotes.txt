@@ -1,0 +1,95 @@
+SchedularNotes
+
+1) How to add scheduling to methods?
+
+	- Annotate main class with "@EnableScheduling"
+
+			@SpringBootApplication
+			@EnableScheduling
+			public class Application {
+				public static void main(String[] args) {
+					SpringApplication.run(Application.class, args);
+				}
+			}
+		
+	- To trigger a method using scheduler have to annotate method using @Scheduled(fixedRate = 3000)
+
+			@Scheduled(fixedRate = 3000)
+			public void methodEvery1Min() {	
+				System.out.println("Schedular for 1 min... ");
+				LOG.info("Schedular for 1 min... ");	
+			}
+		
+	- To trigger method using crons, we can use crons="0 * * * *" in @Scheduled(cron = "0/14 * * * * *")
+
+			@Scheduled(cron = "0/14 * * * * *")
+			public void methodEvery2Min() {
+				System.out.println("Schedular for 2 min... ");
+				LOG.info("Schedular for 2 min... ");
+			}
+
+	- @EnableScheduling we can add at main method , or with @Configuration 
+	
+			 @Configuration
+			 @EnableScheduling
+			 public class AppConfig {
+			     @Bean
+			     public MyTask task() {
+			         return new MyTask();
+			     }
+			 }
+			 
+	- Inside @Scheduled(fixedRate=2000) we have to arguments 
+		
+		1) fixedRate=2000   : 
+			
+			- This scheduling method will trigger job after every 2000 mili sec irrespective of previous job,work Asynchronously.
+			- will be triggered every 2000 mili sec. It will be triggered irrespective of previous scheduled processes.
+	
+	
+		2) fixedDealy=300   : 
+			
+			- This scheduling method will trigger job again only once previous execution have been completed , work Synchronously.
+			- will add 300 mili sec delay between 2 method execution.So next method execution will start after 300msec of first 
+				execution completed.
+		
+		3) cron = "* * * * * *"	 :
+		
+			- 1st * : seconds
+			- 2nd * : minuts
+			- 3rd * : hours
+			- 4th * : day of the month
+			- 5th * : month
+			- 6th * : day of the week
+			
+			ex : "0 0 20 * * TUE"  : every TUE at 8 pm
+			
+		4) cron in application.property file :
+		
+			@Scheduled(cron ="${cron.expression.value}")
+			public void methodEvery10Sec() {		
+				System.out.println("Schedular for 10 sec... ");
+				LOG.info("Schedular for 10 sec... ");
+			}
+		
+			// application.property
+			cron.expression.value = 0/10 * * * * *
+							
+	- We can use @Async annotation above task method , To enable async operation of that method , 
+		for that have to use @EnableAsync above main method.
+		It will use threads to complete each task. 		 
+
+
+
+2) How to use task schedular for asynch task scheduling?
+
+	- we can configure task schedular with @Bean
+			
+			@Bean
+			public TaskScheduler taskSchedular() {
+				ThreadPoolTaskScheduler threadPoolTaskSchedular = new ThreadPoolTaskScheduler();
+				threadPoolTaskSchedular.setPoolSize(10);
+				threadPoolTaskSchedular.setThreadNamePrefix("ThreadPoolTaskScheduler");
+				return threadPoolTaskSchedular;
+			}
+

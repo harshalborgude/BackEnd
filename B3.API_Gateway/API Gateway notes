@@ -1,0 +1,38 @@
+API Gateway notes :
+
+
+1) API Gateways working and creation.
+	
+	- API gateway is nothing but a spring boot application which perfroms tasks of a gateway.
+	- We can also use open source API gateways like Netflix Zuul which will be depricated, amazone aws gateway , azure gateway.
+	- SO we can use "Spring Cloud Gateway"
+	
+	Steps To create api gateway using Spring Boot Project :
+	
+		- Create Eureka Server and add start eureka server application so our API_Gateway application can connect to it.
+			- To create Eureka Server , we just have to create Spring Boot application and add eureka server dependency in pom.xml
+				"spring-cloud-starter-netflix-eureka-server"
+			- Add "@EnableEurekaServer" annotation above main class , and can start application.
+			- Now this application will work as eureka server application.
+			
+		- To create API Gateway application , Create Spring Boot Project and add dependency of 
+			1) Spring Cloud Gateway 
+			2) Eureka Discovery Client.
+		- To main class add "@EnableEurekaClient" annotation so this application becomes client to our eureka server.and add below properties
+			in application.property file
+			
+					server.port=8083
+					spring.application.name=API_Gateway
+					eureka.client.serviceUrl.defaultZone = http://localhost:8761/eureka
+					eureka.client.instance.preferIpAddress = true
+		
+		- using "eureka.client.serviceUrl.defaultZone" url , it will connect to that eureka server.
+		- We can provide routing configs inside application.properties of api gateway like this
+			
+				spring.cloud.gateway.routes[0].id=my_rest_app
+				spring.cloud.gateway.routes[0].uri=lb:my_rest_app
+				spring.cloud.gateway.routes[0].predicates[0] = Path=/restApp/**
+			
+		- So any request which have above mentioned "Path" then request will be redirected to given "uri" of "my_rest_app" microservice.
+			uri=lb:my_rest_app  - this will defined load balenced uri
+		- The same way we can provide n routes and n paths
