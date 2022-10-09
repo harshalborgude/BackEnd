@@ -11,56 +11,56 @@ public class App {
 	// to prevent deadlocks , reentrant lock is usefull.
 	// if inside lock , we encountered exception , then this lock will become infinite lock.
 	// so whatever between lock and unlock , put that inside try catch.
-	
+
 	static int counter=0;
 	static Lock lock=new ReentrantLock();
 	public static void main(String[] args) {
-		
+
 		Thread th1=new Thread(new Runnable() {
 
 			@Override
 			public void run() {
-				lock.lock();				// after this lock call. reentrant lock will be applied, so 
+				lock.lock();				// after this lock call. reentrant lock will be applied, so
 				try {
 					for(int i=1;i<=1000;i++) {   // only this single thread will get executed.no simultaneous operation.
-						App.counter++;			
+						App.counter++;
 					}
 				} finally {
-					
+
 					lock.unlock(); 			// with finally we ensure call to unlock.
 				}
-				
-				
-			}			
+
+
+			}
 		});
-		
+
 		Thread th2=new Thread(new Runnable() {
 
 			@Override
 			public void run() {
 				lock.lock();
 				for(int i=1;i<=1000;i++) {
-					App.counter++;				
+					App.counter++;
 				}
 				lock.unlock();
-			}			
+			}
 		});
 		th1.start();
 		th2.start();
-		
+
 		try {
 			th1.join();					// main method will wait untill th1 finishes
 		} catch (InterruptedException e) {
-			
+
 			e.printStackTrace();
-		} 
+		}
 		try {
 			th2.join();					// main method will wait untill th2 finishes
 		} catch (InterruptedException e) {
-			
+
 			e.printStackTrace();
-		} 
-		
+		}
+
 		System.out.println("final value of counter ="+App.counter);
 
 	}

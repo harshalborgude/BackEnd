@@ -9,11 +9,11 @@ import java.util.concurrent.LinkedBlockingDeque;
 // addfirst() , removelast() , offerFirst() , pollFirst()
 
 public class Dequeue {
-	
+
 	public static void main(String[] args) {
 		Deque<Integer> deque = new LinkedBlockingDeque<>();
-		
-	
+
+
 			deque.offer(1);
 			deque.offer(2);
 			deque.offer(3);
@@ -21,20 +21,20 @@ public class Dequeue {
 			deque.offer(5);
 			deque.offer(6);
 			deque.offer(7);
-		
+
 		for(Integer element: deque){
 			System.out.println(element);
 		}
 		System.out.println("********************");
 		deque.addFirst(0);
 		deque.removeLast();
-		
+
 		for(Integer element: deque){
 			System.out.println(element);
 		}
-		
-		
+
+
 	}
-	
+
 
 }

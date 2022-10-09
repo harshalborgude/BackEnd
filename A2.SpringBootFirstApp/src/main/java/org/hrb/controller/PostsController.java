@@ -2,8 +2,12 @@ package org.hrb.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.hrb.dto.Posts;
 import org.hrb.entity.Post;
+import org.hrb.openFeign.FeignClientDemo;
 import org.hrb.services.PostsService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,6 +30,19 @@ import org.springframework.web.bind.annotation.RestController;
 public class PostsController {
 	
 	PostsService service=new PostsService();
+	
+	@Autowired
+	FeignClientDemo feignClientDemo;
+
+	
+	// getting users using feign client 
+//	@RequestMapping(method = RequestMethod.GET,value = "/getAllPosts")
+	@GetMapping("/getAllPosts")
+	public List<Posts> getAllPosts(){
+		return feignClientDemo.getPosts();
+	}
+	
+	
 	
 	// this will return all the posts
 	// This list will be converted by default into http response by spring boot RestController.

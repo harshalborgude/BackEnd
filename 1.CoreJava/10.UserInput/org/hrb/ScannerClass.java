@@ -6,7 +6,7 @@ import java.util.Scanner;
 //  The Java Scanner class comes under java.util package
 // you have to tell java that this will be the system’s entry (System.in).
 
-// BufferedReader to read from inpput stream = BufferedReader -> InputStreamReader(System.in)
+// BufferedReader to read from input stream = BufferedReader -> InputStreamReader(System.in)
 // BufferedWriter to write into output Stream. = BufferedWriter -> OutputStreamWriter(System.out)
 
 public class ScannerClass {

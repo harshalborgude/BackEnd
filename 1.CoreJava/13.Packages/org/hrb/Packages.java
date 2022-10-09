@@ -13,7 +13,7 @@ public class Packages {
 	public static void main(String[] args) {
 		Java blog = new Java();
 		blog.usedFor();
-	   
- 
+
+
 	}
 }

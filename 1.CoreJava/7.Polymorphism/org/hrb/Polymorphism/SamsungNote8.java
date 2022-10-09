@@ -6,6 +6,7 @@ public class SamsungNote8 extends Phone {
 		super(model);
 	}
 
+	@Override
 	public void features() {
 		System.out.println("Andriod flagship");
 	}

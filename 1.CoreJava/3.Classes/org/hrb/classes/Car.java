@@ -1,6 +1,6 @@
 package org.hrb.classes;
 
-//Classes are the blueprint of object creation. Classes are the user-defined implementation of real-life scenarios. 
+//Classes are the blueprint of object creation. Classes are the user-defined implementation of real-life scenarios.
 
 // A class defines the state and behaviour of an object.// private variable of object can not be accessible outside the class.
 // A constructor is a special method that does not has any return type.

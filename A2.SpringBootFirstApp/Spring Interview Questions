@@ -1,6 +1,153 @@
 Spring Interview Questions
 
+1) What is inversion of control and DI in spring ?
 
+	- Spring IOC container will inject dependency for us , It will find the implementation of parent class or interface and will provide
+		object to us , it will either find using xml.conf or any annotation . This is called dependency injection or Inversion Of Control.
+	- Inversion Of Control (IOC) and Dependency Injection, These are the design patterns that are used to remove dependency from the programming code. 
+		They make the code easier to test and maintain. 
+		
+		class Employee{  
+			Address address;  
+			Employee(){  
+				address=new Address();  
+			}  
+		}  
+	- In such case, there is dependency between the Employee and Address (tight coupling). In the Inversion of Control scenario, we do this something like this:
+		
+		class Employee{  
+			@Autowired
+			Address address;  
+			
+			//Employee(Address address){  
+			//	this.address=address;  
+			//}  
+		}  
+	- Thus, IOC makes the code loosely coupled. In such case, there is no need to modify the code if our logic is moved to new environment.
+	- In Spring framework, IOC container is responsible to inject the dependency. We provide metadata to the IOC container either by XML 
+		file or annotation.
+	- So in below case , Spring IOC container will inject the object for us , So will be very less dependency , 
+		@Autowire 
+		ParenetClassOrInterface obj;
+	- So in this case control is not with the injecting class , it's with Spring / IOC container , so called inversion of control.	
+	
+	Advantage of Dependency Injection
+	- makes the code loosely coupled so easy to maintain
+	- makes the code easy to test
+	
+	- Spring core module provides the IoC container , There are two types of implementations of the Spring IOC container, namely,
+		1) bean factory
+		2) application context
+	- Bean factory is defined using the org.springframework.beans.factory.BeanFactory interface and acts as a container for beans. 
+	- The Bean factory container allows you to decouple the configuration and specification of dependencies from program logic
+	- In the Spring framework, the Bean factory acts as a central IoC container that is responsible for instantiating application objects.
+		It also configures and assembles the dependencies between these objects.
+	
+	
+	
+	
+2) What is the Spring Bean Scope ?
+	There are five types of spring bean scopes:
 
+	singleton - only one instance of the spring bean will be created for the spring container. This is the default spring bean scope. While using this scope,
+				make sure bean doesn’t have shared instance variables otherwise it might lead to data inconsistency issues.
+				
+					@Bean
+					@Scope(value="singleton")
+					public MyBean myBean() {
+						return new MyBean();
+					}
+				- This is the default scope of spring bean , however time we try to create beans , spring will return same bean again , as they have same hascode
+				
+	prototype – A new instance will be created every time the bean is requested from the spring container.
+					
+					@Bean
+					@Scope(value="prototype")
+					public MyBean myBean() {
+						return new MyBean();
+					}
+				- Here every time we will get new instance of the MyBean class.Every new created bean/Object will have different hashcode.
+					
+	request – This is same as prototype scope, however it’s meant to be used for web applications. A new instance of the bean will be created for each HTTP 
+			request.
+			
+					@Bean
+					@Scope(value="request")
+					public MyBean myBean() {
+						return new MyBean();
+					}
+				- Here we will get the error saying "IllegalStateException" 
+				- It’s because request, session and global-session scopes are not available for standalone applications.
 
+	session – A new bean will be created for each HTTP session by the container.
+				- Here we will get the error saying "IllegalStateException" 
+				- It’s because request, session and global-session scopes are not available for standalone applications.
+				
+	global-session – This is used to create global session beans for Portlet applications.
+				- Here we will get the error saying "IllegalStateException" 
+				- It’s because request, session and global-session scopes are not available for standalone applications.
+	
+	
+3) What is use of @Configuration annotation ?
+	
+	- Spring @Configuration annotation allows us to use annotations for dependency injection.
+	
+			@Configuration
+			public class MyConfiguration {
 
+				@Bean
+				public MyBean myBean() {
+					return new MyBean();
+				}				
+			}
+	What if we remove @Configuration annotation?
+	
+	- Beans created inside configuration class, it won’t remain singleton
+	
+4) Design Pattern uses by Spring ?
+	
+	- Spring Framework is based on two design principles - Dependency Injection and Aspect Oriented Programming.
+	- 
+	
+5) What are the different modules in spring framework?
+	
+	- Core componet of spring are : Beans , Core , Context , SpEL
+	- DB : ORM , IDBC
+	- Tests : Junit
+	- Web : Web , Servlet 
+	
+6) What are the major features in different version of Spring ?
+
+	- Spring 2.5 made annotation-driven config possible.
+	- Spring 3.0 made use of java 5 - generics , VarArg , enhancedFor.
+	- Spring 4.0 started supports java 8
+
+7) Some new features in spring 4.0 and 4.1 ?
+
+	- @RestController is introduced with spring MVC application.
+	- @JmsListener - to listen on the queue easily.
+	- Jacksons @JsonView is supported directly on @ResponseBody and ResponseEntity controller methods for serialization 
+		of details for the same POJO.
+		
+8) What is autowiring ?
+
+	- Autowiring enables automatic finding of dependencies.
+	- if @Service annotation is there on any service , that will be considered as a bean , It will be visible to @Autowire to inject
+		dependency if its implementation of any interface or class.
+	- So @Autowired annotation will wire that dependency with the creating object .
+	- So make work of @Autowired , @Service or @Component annotation should be there on that class implementation.
+	- with @Autowrired we can avoid xml configurations.
+	
+9) How is Spring's Singleton bean different from Gang Of Four Singleton pattern ?
+
+	- Singleton is default bean scope in spring. 
+	- Spring singleton means only 1 instance of bean per IOC container/ApplicationContext.
+	- GOF singleton scope means , only 1 instance per JVM / ClassLoader.
+	- We can use prototype scope if we dont want bean as singleton. @Scope(value="prototype")
+	- IN prototype scope , for each request, new bean instance will be created.
+	
+10) 
+	
+	
+	
+	

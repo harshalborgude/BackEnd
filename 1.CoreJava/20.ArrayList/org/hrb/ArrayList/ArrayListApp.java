@@ -11,7 +11,7 @@ import java.util.ArrayList;
 //List : ArrayList, LinkedList
 // set :  HashSet, LinkedHashSet, TreeSet
 // map :  HashMap, LinkedHashMap,TreeMap
-// Queue : LinkedBlockingQueue , ArrayBlockingQueue 
+// Queue : LinkedBlockingQueue , ArrayBlockingQueue
 // Deque : LinkedBlockingDeque , ArrayBlockingDeque
 // Stack : stack
 
@@ -34,7 +34,7 @@ import java.util.ArrayList;
 
 //Linkedlist
 //Here, every node is interconnected to the next node through a memory address link.
-//This is one of the most useful data structures and highly used in real-world scenarios because of its high-speed capacity and fast addition and deletion. 
+//This is one of the most useful data structures and highly used in real-world scenarios because of its high-speed capacity and fast addition and deletion.
 //This basic collection structure is the data in and the address which points to the next node functions as the guide of the respective node (That
 //	is the reason for it being called the Linked List).
 //add() method is used to add data in a newly created linked list.
@@ -52,10 +52,10 @@ import java.util.ArrayList;
 //and LinkedList and TreeSet uses Tree for internal working.
 //HashSet : doesn't guarantee order, allow one null key , faster for common operations like add , search , remove
 //LinkedHashSet : it keep element in order they are added, speed comes after hashset
-//TreeSet : It sorts all objects , doesn't allow null key , much slower bcz needs to perform sorting 
+//TreeSet : It sorts all objects , doesn't allow null key , much slower bcz needs to perform sorting
 
 //Maps
-//A map contains values based on the key, for example, key and value pair. 
+//A map contains values based on the key, for example, key and value pair.
 //Each pair of key and value is known as an entry. Both the key and values are objects
 //A map cannot contain duplicate keys, it must be unique, but the value can be duplicated.
 //The Map.Entry is a key and its value combined into one class,which allows you to iterate over Map entrySet() instead of having to iterate
@@ -67,7 +67,7 @@ import java.util.ArrayList;
 //HashMap is an unordered collection while TreeMap is sorted in the ascending order of its keys.
 
 
-// Stack 
+// Stack
 // java Stack is a LIFO (Last in first out) object.
 // Extends the Vector class but supports only five operations.
 // The Java stack class only has one constructor that is empty or the default constructor.
@@ -82,7 +82,7 @@ import java.util.ArrayList;
 //LinkedBlockingQueue
 //LinkedBlockingQueue is of dynamic size. It’s not required to provide size while creating LinkedBlockingQueue.
 //add() method is used to add data at the end of the queue
-//ArrayBlockingQueue 
+//ArrayBlockingQueue
 //Like Arrays, ArrayBlockingQueue is of fixed size.
 //Size of ArrayBlockingQueue should be provided as arguments while creating a queue.
 //add() method is used to add data at the end of the queue.
@@ -106,7 +106,7 @@ import java.util.ArrayList;
 public class ArrayListApp {
 
 static ArrayList<String> listNames = new ArrayList<>();
-	
+
 	public static void main(String[] args) {
 		listNames.add("Chaand"); //Autoboxing
 		listNames.add("John");
@@ -124,12 +124,12 @@ static ArrayList<String> listNames = new ArrayList<>();
 		System.out.println("************");
 		System.out.println(listNames.get(3)); // unboxing
 	}
-	
+
 	void displayList(ArrayList<String> names){
 		for(String name: names){
 			System.out.println(name);
 		}
-		
+
 	}
 	void removeNameByPosition(int position){
 	   listNames.remove(position);
@@ -137,5 +137,5 @@ static ArrayList<String> listNames = new ArrayList<>();
 	void removeNameByString(String name){
 		listNames.remove(name);
 	}
-	
+
 }

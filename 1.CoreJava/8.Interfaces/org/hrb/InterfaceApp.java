@@ -6,13 +6,13 @@ package org.hrb;
 // Interfaces are used to perform multiple inheritances
 
 public class InterfaceApp {
-	
+
 	public static void main(String[] args) {
 		Phone phone = new OnePlus5();
 		System.out.println("Processor: "+phone.processor());
 		System.out.println("Space in GB: "+phone.spaceInGB());
 		System.out.println("Os: "+phone.OS());
-		
+
 		Phone phone1 = new Iphone8();
 		System.out.println("Processor: "+phone1.processor());
 		System.out.println("Space in GB: "+phone1.spaceInGB());

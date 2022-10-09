@@ -4,5 +4,5 @@ public interface IsAlive {
 
 
 	public void breathe();
-	
+
 }

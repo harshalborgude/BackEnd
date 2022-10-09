@@ -22,7 +22,7 @@ public class Loops2 {
 				System.out.println(i);
 			}
 
-			
+
 		}
 
 	}

@@ -1,7 +1,9 @@
 package org.hrb;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
 // Spring boot dont support jsp and if HTML pages are there it is considered as homepage
 // In spring boot embedded tomcat is used - so no need to deploy that application in web server.
@@ -9,8 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 // @RestController is important annotation to implement a restfull API
 
 @SpringBootApplication
+@EnableFeignClients
 public class BlogApp {
-
+	
+	
 	public static void main(String[] args) {
 		
 		SpringApplication.run(BlogApp.class, args);

@@ -9,8 +9,8 @@ class Brackets{
 
 		 //  with this synchronized block , if generate method get called from any instances , even then
 		 // it will work in synchronized way only.
-		 
-		
+
+
 			for(int i=1;i<=10;i++) {
 				try {
 					Thread.sleep(1);
@@ -25,7 +25,7 @@ class Brackets{
 					System.out.print("]");
 				}
 			}
-		
+
 
 		for(int i=1;i<=10;i++) {
 			try {
@@ -48,7 +48,7 @@ public class SynchronizedMethodApp {
 	// if objects are differnt then synchronized method will not work in synchronized manner.
 	// in this case we have to make synchronized(this) block for that perticular method.
 	// so in this case we have to preffer synchronized block over synchronized method.
-	
+
 	public static void main(String[] args) {
 		Brackets bracket1=new Brackets();
 		Brackets bracket2=new Brackets();
@@ -67,7 +67,7 @@ public class SynchronizedMethodApp {
 			}
 
 
-		}).start();;
+		}).start();
 
 		new Thread(new Runnable() {
 
@@ -76,12 +76,12 @@ public class SynchronizedMethodApp {
 				long startTime= System.currentTimeMillis();
 				for(int i=1;i<=10;i++) {
 					bracket2.generate();
-				}				
+				}
 				long endTime= System.currentTimeMillis();
 				System.out.println("time for thread 2:"+(endTime-startTime));
 			}
 
-		}).start();;
+		}).start();
 
 	}
 

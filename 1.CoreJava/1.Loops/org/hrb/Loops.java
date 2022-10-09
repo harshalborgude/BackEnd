@@ -8,10 +8,10 @@ package org.hrb;
 // continue statements are used. Generally, the continue statement ends the current iteration of the loop.
 
 public class Loops {
-	
-	
+
+
 	public static void main(String[] args) {
-		
+
 		/*// Infinite for loop
 		for ( ; ; ) {
 			System.out.println("Testing text");
@@ -22,13 +22,13 @@ public class Loops {
 			System.out.println("Infinite loop");
 			// break;
 		}*/
-		
+
 		int i = 0;
 		do {
 			System.out.println(i);
 			i++;
 		} while (i <= 10);
-	
+
 	}
 
 }

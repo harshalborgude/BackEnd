@@ -2,7 +2,7 @@ package org.hrb.stack;
 
 import java.util.Stack;
 
-//Stack 
+//Stack
 //java Stack is a LIFO (Last in first out) object.
 //Extends the Vector class but supports only five operations.
 //he Java stack class only has one constructor that is empty or the default constructor.
@@ -13,7 +13,7 @@ import java.util.Stack;
 
 
 public class StackApp {
-	
+
 	public static void main(String[] args) {
 		Stack<Integer> demo = new Stack<>();
 		demo.push(0);
@@ -22,12 +22,12 @@ public class StackApp {
 		demo.push(3);
 		demo.push(4);
 		demo.push(5);
-		
+
 		for(Integer temp:demo) {
 			System.out.println(temp);
 		}
-		
-		
+
+
 	}
 
 }

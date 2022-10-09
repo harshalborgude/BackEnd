@@ -5,7 +5,7 @@ package org.hrb.nestedClasses;
 // Static nested classes − These are members of a class and declared static are called static nested classes.  It can be accessed without creating an instance of the external class, using other static members. Like static members, a static nested class does not have access to the instance variables and methods of the external class.
 
 public class NestedClasses {
-	
-	
+
+
 
 }

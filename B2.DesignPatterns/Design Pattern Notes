@@ -3,18 +3,18 @@ Design Patterns :
 A) Creational Design Patterns :
 	1) Singleton* - to create singleton object.
 	2) Factory* - a class is used to get the object of class, That is called as Factory of Objects
-	3) Abstract Factory
-	4) Builder
+	3) Abstract Factory*
+	4) Builder*
 	5) Prototype
 	
 B) Structural :
-	6) Adapter 
+	6) Adapter* 
 	7) Composite
 	8) Proxy*
-	9) Fly Weigh 
+	9) Fly Weigh* 
 	10) Facade
 	11) Bridge
-	12) Decorator
+	12) Decorator* 
 	
 	
 C) Behavioural :
@@ -22,13 +22,32 @@ C) Behavioural :
 	14) Mediator
 	15) Chain Of Responsibility
 	16) Observer
-	17) Strategy
+	17) Strategy*
 	18) Command
-	19) State
+	19) State*
 	20) Visitor
 	21) Iterator
 	22) Interpreter
 	23) Memento
+
+--------------------------------------------------------------
+Imp Design Patterns :
+	1) Singleton - d
+	2) Factory Pattern - d
+	3) Abstract Factory 
+	4) Builder 
+	5) Prototype Pattern
+	
+	5) Adaptor 
+	6) Proxy 
+	7) Flyweigh
+	8) Decorator : BufferedReader , BufferedWriter , wrapper classes
+	
+	9) Template Method
+	10) Chain Of Responsibility
+	11) Strategy
+	
+
 
 ===============================================================================================================================================
 1) Singleton Design Pattern : https://www.baeldung.com/spring-framework-design-patterns
@@ -44,6 +63,7 @@ C) Behavioural :
 		OperatingSystemFactory's Object , and that Factory Objects created Objects for us using some strings or method's
 	- How it is creating objects internally it is totally hidden from us , This pattern called as "Factory Design Pattern"
 	- In Factory pattern,we create object without exposing the creation logic to client and refer to newly created object using a common interface
+	- It is also known as virtual constructor.
 
 	Implementation: 
 		- Define a factory method inside an interface. 
@@ -57,11 +77,65 @@ C) Behavioural :
 		This design pattern has been widely used in JDK, such as :
 		1. getInstance() method of java.util.Calendar, NumberFormat, and ResourceBundle uses factory method design pattern. 
 		2. All the wrapper classes like Integer, Boolean etc, in Java uses this pattern to evaluate the values using valueOf() method. 
-		3. java.nio.charset.Charset.forName(), java.sql.DriverManager#getConnection(), java.net.URL.openConnection(), java.lang.Class.newInstance(),
+		3. java.nio.charset.Charset.forName(), java.sql.DriverManager.getConnection(), java.net.URL.openConnection(), java.lang.Class.newInstance(),
 			 java.lang.Class.forName() are some of their example where factory method design pattern has been used.
 
 
+=================================================================================================================================================
+3) Abstract Factory Pattern:
 
+	- It will be more advance version of Factory Pattern , In Factory we have only 1 factory that creates Objects, So in Abstract Factory
+		We have factory of factories.
+	- Using Abstract Factory class , we get the factory Object to get required Object.And from that Object we get the Object we wanted.
+	
+			AbstractFactory bankFactory = FactoryCreator.getFactory("Bank");  
+			Bank b=bankFactory.getBank(bankName);  
+
+	Advantage of Abstract Factory Pattern
+	- Abstract Factory Pattern isolates the client code from concrete (implementation) classes.
+	- It eases the exchanging of object families.
+	- It promotes consistency among objects.
+	
+	Usage of Abstract Factory Pattern
+	- When the system needs to be independent of how its object are created, composed, and represented.
+	- When the family of related objects has to be used together, then this constraint needs to be enforced.
+	- When you want to provide a library of objects that does not show implementations and only reveals interfaces.
+	- When the system needs to be configured with one of a multiple family of objects.
+	
+	UML for Abstract Factory Pattern ( refer : AbstractFactoryPattern-2.jpg )
+	- We are going to create a Bank interface and a Loan abstract class as well as their sub-classes.
+	- Then we will create AbstractFactory class as next step.
+	- Then after we will create concrete classes, BankFactory, and LoanFactory that will extends AbstractFactory class
+	- After that, AbstractFactoryPatternExample class uses the FactoryCreator to get an object of AbstractFactory class.
+	- See the diagram carefully which is given below
+
+
+
+=================================================================================================================================================
+3) Proxy Design Pattern :
+
+	- 
+
+
+
+	
+=================================================================================================================================================
+4) Fly Weigh Design Pattern :
+
+	- 
+	
+	
+	
+=================================================================================================================================================
+5) Template Method Design Pattern :
+
+	- 
+
+
+=================================================================================================================================================
+6) Dependency Injection Design Pattern :
+
+	- 
 
 
 

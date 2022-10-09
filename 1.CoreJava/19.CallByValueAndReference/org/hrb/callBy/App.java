@@ -16,15 +16,15 @@ public class App {
 		System.out.println(name2[0]);
 		App app = new App();
 		app.displayNames(names);
- 
+
 	}
- 
+
 	void displayNames(String[] names) {
- 
+
 		for (String name : names) {
 			System.out.println(name);
 		}
 		names[0] = "Salim";
 	}
-	
+
 }

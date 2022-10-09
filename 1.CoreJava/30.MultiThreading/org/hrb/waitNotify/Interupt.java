@@ -2,7 +2,7 @@ package org.hrb.waitNotify;
 
 public class Interupt {
 
-	
+
 	static public int balence=0;
 
 	public void withdraw(int amnt) {
@@ -13,7 +13,7 @@ public class Interupt {
 					wait();
 				} catch (InterruptedException e) {
 					System.out.println("Thread got interupted!");
-					return; 
+					return;
 				}
 			}
 		}
@@ -44,8 +44,8 @@ public class Interupt {
 			}
 			th1.interrupt();
 		}
-		
-		
+
+
 	}
 
 }

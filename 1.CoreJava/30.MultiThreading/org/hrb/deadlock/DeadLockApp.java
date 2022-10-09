@@ -8,7 +8,7 @@ public class DeadLockApp {
 
 	// reproducing same deadlock schenario with lock method of reentrant lock.
 	// mechanism to prevent deadlock schenarios
-	
+
 	public static void main(String[] args) {
 		Lock lock1=new ReentrantLock();
 		Lock lock2=new ReentrantLock();
@@ -20,7 +20,7 @@ public class DeadLockApp {
 				boolean flagLock2=false;
 				boolean doneFlag1=false;
 				boolean doneFlag2=false;
-				
+
 				while(true) {
 					try {
 						if(!flagLock1) {
@@ -29,9 +29,9 @@ public class DeadLockApp {
 						if(!flagLock2) {
 							flagLock2=lock2.tryLock(10, TimeUnit.MILLISECONDS);
 						}
-						
+
 					} catch (InterruptedException e) {
-						
+
 						e.printStackTrace();
 					}finally {
 						if(flagLock1 && !doneFlag1) {
@@ -48,11 +48,11 @@ public class DeadLockApp {
 							break;
 						}
 					}
-					
+
 				}
-				
-						
-			}			
+
+
+			}
 		});
 		Thread th2=new Thread(new Runnable() {
 
@@ -71,7 +71,7 @@ public class DeadLockApp {
 							flagLock2=lock2.tryLock(10, TimeUnit.MILLISECONDS);
 						}
 					} catch (InterruptedException e) {
-						
+
 						e.printStackTrace();
 					}finally {
 						if(flagLock1 && !doneFlag1) {
@@ -88,23 +88,23 @@ public class DeadLockApp {
 							break;
 						}
 					}
-					
+
 				}
-				
-						
-			}		
+
+
+			}
 		});
 		th1.start();
 		th2.start();
-		
+
 		try {
 			th1.join();
 			th2.join();
 		} catch (InterruptedException e) {
-			
+
 			e.printStackTrace();
 		}
-		
+
 		System.out.println("in main thread!");
 
 	}

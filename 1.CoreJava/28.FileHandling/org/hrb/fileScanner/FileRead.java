@@ -1,8 +1,8 @@
 package org.hrb.fileScanner;
 
-import java.util.Scanner;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class FileRead {
 
@@ -11,17 +11,17 @@ public class FileRead {
 	// BufferedReader has 8kb buffer. Scanner have 1Kb buffer.
 	// BUfferedReader is faster as simply reads sequence of chars
 	// Scanner is slower as it does parsing of input data.
-	// so for dealing with files BufferedReader is preffered 
+	// so for dealing with files BufferedReader is preffered
 	// and for user inouts , Scanner class is preffered.
 	// if u dont close open file or scanner then there will be resource leak.
-	
-	// try with resource 
+
+	// try with resource
 	// whenever opened stream or resourse is not closed then there will be a problem of resourse leak,
 	// so it should be inside parenthesys of try block or resource should be closed after use.
 	// try(<statement here >){}
-	
+
 	public static void main(String[] args) {
-		
+
 		try {
 			Scanner sc =new Scanner(new File("myDirectory\\file.txt"));
 			String line;

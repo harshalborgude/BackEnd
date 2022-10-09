@@ -1,12 +1,9 @@
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.charset.StandardCharsets;
-//import org.json.simple.JSONObject;
 
 public class MyStock {
 
@@ -23,7 +20,7 @@ public class MyStock {
 			connection.connect();
 			System.out.println("response code:" + connection.getResponseCode());
 			//InputStream inputStream=connection.getInputStream();
-			
+
 			BufferedReader br = null;
 			String output="";
 			if (connection.getResponseCode() == 200) {
@@ -41,12 +38,12 @@ public class MyStock {
 			               output=output.concat(strCurrentLine);
 			        }
 			}
-			
+
 			System.out.println("Response :");
 			System.out.println(output);
-			
-			
-			
+
+
+
 		} catch (MalformedURLException e) {
 			System.out.println("Some Exception occured while getting http connection");
 			e.printStackTrace();

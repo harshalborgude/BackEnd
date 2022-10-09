@@ -155,23 +155,16 @@ Hibernate Interview Questions :
 21) What is automatic dirty checking in hibernate?
 	The automatic dirty checking feature of Hibernate, calls update statement automatically on the objects that are modified in a transaction.
 		
-22) How many types of association mapping are possible in hibernate?
-	There can be 4 types of association mapping in hibernate.
-
-	1) One to One
-	2) One to Many
-	3) Many to One
-	4) Many to Many
 	
-23) Is it possible to perform collection mapping with One-to-One and Many-to-One?
+22) Is it possible to perform collection mapping with One-to-One and Many-to-One?
 	No, collection mapping can only be performed with One-to-Many and Many-to-Many.
 	
-24) What is lazy loading in hibernate?
+23) What is lazy loading in hibernate?
 	Lazy loading in hibernate improves the performance. It loads the child objects on demand.
 	Since Hibernate 3, lazy loading is enabled by default, and you don't need to do lazy="true". It means not to load the child objects 
 		when the parent is loaded.
 		
-25) What is HQL (Hibernate Query Language)?
+24) What is HQL (Hibernate Query Language)?
 	Hibernate Query Language is known as an object-oriented query language. It is like a structured query language (SQL).
 
 	The main advantage of HQL over SQL is:
@@ -180,23 +173,233 @@ Hibernate Interview Questions :
 	2) Database independent
 	3) Simple to write a query
 	
-26) What is the difference between first level cache and second level cache?
+25) What is the difference between first level cache and second level cache?
 	No.		First Level Cache							|			Second Level Cache
 	1)	First Level Cache is associated with Session.	|	Second Level Cache is associated with SessionFactory.
 	2)	It is enabled by default.						|	It is not enabled by default. 
 	
+	
+26) Primary Key generation Strategies in hibernate ?
+
+		@Id 
+		@GeneratedValue(strategy = GenerationType.AUTO)   
+		private Integer id;
+	
+	// IDENTITY, AUTO, SEQUENCE, TABLE
+	
+	1) IDENTITY :
+		- It works like auto increament of primary keys.
+		- Max value of primary key is depend upon what data type is given while declaring that column in entity table.
+		- Will not work with oracle db.
+			
+	2) AUTO : 
+		- with this it will create a squence table in database and using that it will generate primary keys.
+		- sequence table maintains a next value , To be keep as next primary key for the table.
+		- hibernate_sequence table will be created
+
+	3) SEQUENCE :
+		- Works same as AUTO only,
+		- Will create a sequence table in database and will keep next primary key to be used.
+		- hibernate_sequence table will be created
+		
+	4) TABLE : 
+		- table , sequence , auto works similar in mySql.
+		- Will create a sequence table in database and will keep next primary key to be used.
+		- hibernate_sequences table will be created
+
+
+
+27) How many types of association mapping are possible in hibernate?
+	There can be 4 types of association mapping in hibernate.
+
+	1) One to One
+	2) One to Many
+	3) Many to One
+	4) Many to Many
+	
+	---------------------------------------------------------------------------------------------
+	
+	(Consider This 2 tables to explain Associate Mappings )
+	
+	Employee Table (Table 1 - Primary Table)
+		- emp_id
+		- emp_name
+		- emp_sirname
+		- emp_address : ( street, City, State, Country, Zip ) - columns of Emp_Address Table
+		
+	Employee_Address (Table 2 - Dependant Table)
+		- Street
+		- City
+		- State
+		- Country
+		- Zip
+	
+	----------------------------------------------------------------------------------------------
+	
+	1) One to One : 
+	
+		- When 1 Employee from Employee table have 1 address then "OneToOne" mapping is used.
+		
+				// Table 1
+				@Entity
+				@Table(name="employee")
+				public class Employee{
+					
+					
+					@Id
+					@GeneratedValue(strategy=GenerationType.Auto)
+					@Column(name="emp_id")
+					private Integer id;
+					
+					@Column(name="emp_name")
+					private String emp_name
+					
+					.
+					.
+					
+					@OneToOne(cascade=CascadeType.ALL)
+					@JoinColumn(name="address_id")
+					private Emp_Adrress emp_address;
+				
+				}
+				
+				
+				// Table 2
+				@Entity
+				@Table(name="emp_address")
+				public class Emp_Address{
+					
+					@Id
+					@GeneratedValue(strategy=GenerationType.IDENTITY)
+					@Column(name="emp_id")
+					private Integer id;
+					
+					@Column(name="street")
+					private String street;
+					
+					@Column(name="city")
+					private String city;
+					
+					etc...
+				
+				}
+			
+		
+		- SO considering above tables , Object of "Employee" table also consist Object of "Emp_Address" Table, That is mapped using "OneToOne"
+			mapping.
+		- Both tables have joined using "id" : @JoinColumn(name="address_id")
+		- Whenever we try to save Object of Employee , Object of Address will not be saved as it is the another table so to solve that have to
+			use "cascade" option with "OneToOne" mapping 
+			
+			@OneToOne(cascade=CascadeType.ALL)
+			
+			- here if we use CascadeType.Persist then we will be only able to save this object with persist method only, With All can be
+				able to save using all ways.like save , persist etc.
+				
+				Cascade Types : Persist , Merge, Detached, All , etc
+				
+		- In Employee Table , only Address_Id will be stored which will refer Address Table.
+		
+		
+	----------------------------------------------------------------------------------------------
+	
+	2) One to Many : 
+		
+		- 1 Department can Have many employees so ,here Relation will be 1 to many
+		- Department entity will be having list of employees ( One dept table having many employees )
+		
+				// Table 1
+				@Entity
+				@Table(name="department_table")
+				public class Department{
+					
+					@Id
+					@GeneratedValue(strategy=GenerationType.IDENTITY)
+					@Column(name="department_id")
+					private Integer departmentId;
+					
+					@Column(name="department_name")
+					private String department_name;
+					
+					.
+					.
+					// Only required if we want to create 3rd joining table.
+					//@JoinTable(name="department_employee_table",JoinColumns=@JoinColumn(name="department_id"),inverseJoinColumns=@JoinColumn(name="emp_id"))
+					
+					@OneToMany(cascade=CascadeType.ALL,mappedBy="dept_id")
+					private List<Employee> empList = new ArrayList<Employee>();
+				}
+				
+				// Table 2
+				@Entity
+				@Table(name="employee")
+				public class Employee{
+					
+					
+					@Id
+					@GeneratedValue(strategy=GenerationType.Auto)
+					@Column(name="emp_id")
+					private Integer id;
+					
+					@Column(name="emp_name")
+					private String emp_name
+					
+					@Column(name="emp_name",unique=true)
+					private String emp_name
+					.
+					
+					@JoinColumn(name="dept_id")
+					@ManyToOne(cascade=CascadeType.ALL)
+					private String dept_id;
+				}
+		
+		- So here hibernate will create 3 tables , "Department Table" , "Department_Employee" joint table and "Employee table" bcz of OneToMany relation.
+		- inside joint table it will have keys of both table.
+		- So whenever we will create Object of department table , so in that object we can save list of Employees , And when we do Save Operation
+			then it will insert 1 value in department table and n values in employee table based on number of employees.
+		- after updating both table , it will also update 3rd joint table also with all the keys of dept_id and respective all the emp_id's so 
+			if 3 emp is added then it will add 3 rows with same dept_id and 3 diff emp_id's 
+			jointTable = dept_id (1,1,1) , emp_id(1,2,3) , like this data will be there in joint table
+		- So here 3 tables will be created and 3rd table only consists the relations of dept and employee tables.
+				@JoinTable(name="department_employee_table",
+								JoinColumns=@JoinColumn(name="department_id"),inverseJoinColumns=@JoinColumn(name="emp_id"))
+		- using above @JoinTable annotation we can provide name to that joint table and also to columns of that table also.
+		- SO here from department perspective, OneToMany mapping is valid.
+		- and from employees perspective , ManyToOne mapping is valid.
+		- Creation of that 3rd joint table is not mandatory to maintain, that we can adjust in our employee tables as its on "Many" side.
+		- SO to do that , we will have to add 1 column in Employee table i.e "dept_id".We will not able to add emp_id in dept table as it will create 
+			to many repeated columns.
+		- We can remove that @JoinTable() annotation from dept table if we dont want joining table.
+		- So we will have to add 1 column in employee table with "dept_id" name , and if we look from employee table to dept table, 
+			many clms of employee table belongs to 1 clm of Dept table , 
+		- so here @ManyToOne relation will be there from employee table perspective.
+			
+				@JoinColumn(name="dept_id")
+				@ManyToOne(cascade=CascadeType.ALL)
+				private String dept_id;
+
+		- In employee table we have to add @OneToMany annotation with (mappedBy="dept_id") argument with mapped tables id var name, if we dont give this argument, 
+			then hibernate will again create joining table. SO here OneToMany association will be created by looking this 2 annotations
+				
+					// Table 1
+					@OneToMany(cascade=CascadeType.ALL,mappedBy="dept_id")
+					private List<Employee> empList = new ArrayList<Employee>();
+					
+					// Table 2
+					@JoinColumn(name="dept_id")
+					@ManyToOne(cascade=CascadeType.ALL)
+					private String dept_id;
+				
+				
+		- So now here while storing data , We have to store employee objects inside dept table as well , department objects reference in employee objects also.
 
 		
+	----------------------------------------------------------------------------------------------
+	
+	3) Many to Many ( Unidirectional ) : 
+		
+		- 
 		
 		
 		
 		
-		
-		
-		
-		
-			
-			
-			
-			
-

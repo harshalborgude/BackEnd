@@ -1,0 +1,121 @@
+Mostly Asked Java Questions
+
+1) Difference between Default method and Static method in interfaces:
+
+	- Default methods enable you to add new functionality to the interfaces of your libraries and ensure binary compatibility with code written 
+		for older versions of those interfaces.
+	- A static method is a method that is associated with the class in which it is defined rather than with any object. Every instance of the 
+		class shares its static methods.
+	- Static method in interface are part of the interface class cannot implement or override it whereas class can override the default method.
+
+2) What is functional Interface : refer FunctionalInterfaces_7.java file
+	
+	- A functional interface is an interface that contains only one abstract method. They can have only one functionality to exhibit. 
+	- From Java 8 onwards, lambda expressions can be used to represent the instance of a functional interface. 
+	- A functional interface can have any number of default methods. Runnable, ActionListener, Comparable are some of the examples of functional 
+		interfaces.
+	 Ex :  Runnable,Comparable, ActionListener
+	- will be anotated with @FunctionalInterface
+	- Functional interfaces are interfaces that ensure that they include precisely only one abstract method.
+	- As described earlier, functional interfaces can contain only one abstract method. However, they can include any quantity of default and 
+		static methods. 
+	- In Functional interfaces, there is no need to use the abstract keyword as it is optional to use the abstract keyword because, by default, 
+		the method defined inside the interface is abstract only.
+	- We can also call Lambda expressions as the instance of functional interface.
+	- @FunctionalInterface annotation is used to ensure that the functional interface can’t have more than one abstract method.
+	- In case more than one abstract methods are present, the compiler flags an ‘Unexpected @FunctionalInterface annotations
+	
+	- Since Java SE 1.8 onwards, there are many interfaces that are converted into functional interface. All these interfaces are annotated with 
+		@FunctionalInterface. These interfaces are as follows
+		1) Runnable ->  This interface only contains the run() method.
+		2) Comparable -> This interface only contains the compareTo() method.
+		3) ActionListener -> This interface only contains the actionPerformed() method.
+		4) Callable -> This interface only contains the call() method.
+		
+	- If more than one functional interface, that interface will not be called a functional interface. It is called a non-functional interface.
+	- There is no such need for the @FunctionalInterface annotation as it is voluntary only. This is written because it helps in checking the 
+		compiler level. Besides this, it is optional.
+	- An infinite number of methods (whether static or default) can be added to the functional interface. In simple words, there is no limit to 
+		a functional interface containing static and default methods.
+	
+	- Java SE 8 included four main kinds of functional interfaces which can be applied in multiple situations. 
+		1) Consumer : .ForEach()
+		2) Predicate : .filter()
+		3) Function :  .map()
+		4) Supplier
+		
+		
+3)  What are the marker interfaces in java?
+ 
+ 	- A marker interface is an interface that has no methods or constants inside it (empty interface)
+ 	
+ 	1) Serializable - To serialize the object of that class this marker interface is used
+ 	2) Cloneable - By implementing Cloneable interface we make sure that instances of class A can be cloned.
+ 		
+ 	Cloneable interface is present in java.lang package. There is a method clone() in Object class. A class that implements the Cloneable 
+ 	interface indicates that it is legal for clone() method to make a field-for-field copy of instances of that class. 
+	
+4) Can we Overload or Override static methods in java ?
+	
+	Overriding : No 
+		- Overriding is a feature of OOP languages like Java that is related to run-time polymorphism. 
+		- A subclass (or derived class) provides a specific implementation of a method in the superclass (or base class). 
+		- We can declare static methods with the same signature in the subclass, but it is not considered overriding as there won’t be any run-time polymorphism. 
+			Hence the answer is ‘No’. 
+		- If we have static method in Parent class and that class is extended by Child class and in child also we have static method with same name and signature
+		- Then Whatever class we are using to hold object , that class's static method will be called and Object creation class's static method will be hidden.
+		
+	Overloading: Yes
+		- Overloading is also a feature of OOP languages like Java that is related to compile-time (or static) polymorphism.
+		- This feature allows different methods to have the same name, but different signatures, especially the number of input parameters and type of input 
+			parameters.
+		- We can have two or more static methods with the same name, but differences in input parameters. 
+		- We cannot overload two methods in Java if they differ only by static keyword (number of parameters and types of parameters is the same)
+		
+
+5) difference between equals and hashcode?
+
+	- The equals() and hashcode() are the two important methods provided by the Object class for comparing objects.
+	
+	Java equals() :
+	- The java equals() is a method of lang.Object class, and it is used to compare two objects.
+	- To compare two objects that whether they are the same, it compares the values of both the object's attributes.
+	- By default, two objects will be the same only if stored in the same memory location.
+
+	Java hashcode() :
+	- A hashcode is an integer value associated with every object in Java, facilitating the hashing in hash tables.
+	- To get this hashcode value for an object, we can use the hashcode() method in Java. It is the means hashcode() method that returns the 
+		integer hashcode value of the given object.
+	- Since this method is defined in the Object class, hence it is inherited by user-defined classes also.
+	- The hashcode() method returns the same hash value when called on two objects, which are equal according to the equals() method. And if the 
+		objects are unequal, it usually returns different hash values.
+	
+	- If two objects are the same as per the equals(Object) method, then if we call the hashCode() method on each of the two objects, it must 
+		provide the same integer result.
+	- As per the Java documentation, both the methods should be overridden to get the complete equality mechanism; using equals() alone is not 
+		sufficient. It means, if we override the equals(), we must override the hashcode() method.
+
+
+	- The value returned by hashCode() is the object's hash code, which is the object's memory address in hexadecimal.
+	- equals() checks if the two object references are same. 
+	- If two objects are equal then their hashCode must be the same, but the reverse is not true.
+
+
+6) Lifecycle of Spring beans :
+
+	- container started 
+	- Bean instantiated.
+	- Dependencies Injected.
+	- Custom init() method.
+	- Custom utility methods.
+	- custom destroy() method.
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

@@ -4,5 +4,5 @@ public interface LiveLife {
 
 	public void speak();
 	public void message();
-	
+
 }

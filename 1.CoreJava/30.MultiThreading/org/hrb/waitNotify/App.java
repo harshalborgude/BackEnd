@@ -4,7 +4,7 @@ public class App {
 
 	// notify method should enclosed in synchronised block.
 	// so by enclosing wait in synchronized block , there will not be any exception and crash.
-	// one thread is waiting for another thread to complete, once complete will call notify method and 
+	// one thread is waiting for another thread to complete, once complete will call notify method and
 	// lock on another waiting method get revoked!
 	// with notifyAll(), all locks by wait method get released!
 	// but notify all should be surrounded with synchronized block.

@@ -32,12 +32,12 @@ public class StreamFilter_6 {
 		values.stream()
 			  .filter(p)
 			  .forEach(System.out::println);
-		
+
 		System.out.println(values.stream()
 			      				 .filter(p)
 			      				 .reduce((c,e)-> c+e));
-		
-		
+
+
 		// get first value which is divisible by 5, after multiplying by 2
 		System.out.println(values.stream()
  				 .filter(i -> i%5==0)
@@ -47,35 +47,35 @@ public class StreamFilter_6 {
 		// Optional[40] -> there is always possibility that will get null result , so getting optional result.
 		// Optional.empty -> if null is returned as a result.
 		// orElse(0) -> if result is empty then , 0 is returned.
-		
+
 		/*
-		 * In above operation , in stream when find first will be executed as its a terminal method , so after its 
+		 * In above operation , in stream when find first will be executed as its a terminal method , so after its
 		 * execution , map will start mapping , as we want only first element , map will process only for first element
 		 * 	so map will ask filter method to filter only first element and then it returns the answer.
 		 * So in stream api , it dont process all the data , it process only required data , called as lazy evaluation.
 		 */
-		
-		// To proove above all things 
-		
+
+		// To proove above all things
+
 		System.out.println("******************");
-		
+
 		System.out.println(values.stream()
 				 .filter(StreamFilter_6::isDivisible)
 				 .map(StreamFilter_6::mapDouble)
 				 .findFirst()
 				 .orElse(0));
-		
+
 	}
-	
+
 	public static boolean isDivisible(int i) {
 		System.out.println("in isDivisible :"+i);
 		return i%5==0;
 	}
-	
+
 	public static int mapDouble(int i) {
 		System.out.println("in mapDouble :"+i);
 		return i*2;
 	}
-	
-	
+
+
 }

@@ -1,7 +1,8 @@
 package org.hrb.MultipleInheritance;
 
 public abstract class Person implements IsAlive, LiveLife{
-	
+
+	@Override
 	public void speak() {
 		System.out.println("Shares his/her thoughts.");
 	}
@@ -13,7 +14,7 @@ public abstract class Person implements IsAlive, LiveLife{
 	public void message() {
 		System.out.println("life is a journey, keep moving and meet new people.");
 	}
-	
+
 	public abstract void eat();
 
 }

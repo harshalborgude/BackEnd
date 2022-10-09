@@ -37,7 +37,7 @@ Microservices Interview Questions
 		
 	- This above way , one microservice can communicate with other , If second microservice is not available then it will give "Unable to connect Error"
 
-	a) Using "WebClient" :
+	b) Using "WebClient" :
 		
 		
 		WebClient.builder webClientBuilder = WebClient.builder();
@@ -49,7 +49,14 @@ Microservices Interview Questions
 											.bodyToMono(String.class)				// convert response to given classl, mono means promise
 											.block();								// blocking execution till mono returns the data.
 			
-		
+			
+	- WebClient offers support for both synchronous and asynchronous HTTP requests and streaming scenarios. Therefore, RestTemplate will be 
+		marked as deprecated in a future version of the Spring Framework and will not contain any new functionalities.
+			
+	
+	c) Feign Client : 
+			
+			
 2) How loadbalencing takes place in microservices?
 	- We register our services to registry server , for that we are making use of @EnableEurekaCLient
 	- Whenever we are getting requests from other services or clients , then we have to use @LoadBalence annotation to at bean for loadbalencing.
@@ -59,7 +66,7 @@ Microservices Interview Questions
 		so this annotation does loadbalencing internally.
 	- This is client side load balencing , so client does load balencing automatically.
 		
-3) 3) HTTP status codes : 200ok , 404 not found , 500 internal server error.
+3) HTTP status codes : 200ok , 404 not found , 500 internal server error.
 	1xx : Informational - request is recieved & process is continued. 
 			100-server have recieved the request header and client should proceed for body ,
 			102- server has recieved the request and processing the request
@@ -74,4 +81,80 @@ Microservices Interview Questions
 			503 service unavailable
 		
 		
+	
+	
+5) API Gateways working and creation.
+	
+	- API gateway is nothing but a spring boot application which perfroms tasks of a gateway.
+	- We can also use open source API gateways like Netflix Zuul which will be depricated, amazone aws gateway , azure gateway.
+	- SO we can use "Spring Cloud Gateway"
+	
+	Steps To create api gateway using Spring Boot Project :
+	
+		- Create Eureka Server and add start eureka server application so our API_Gateway application can connect to it.
+			- To create Eureka Server , we just have to create Spring Boot application and add eureka server dependency in pom.xml
+				"spring-cloud-starter-netflix-eureka-server"
+			- Add "@EnableEurekaServer" annotation above main class , and can start application.
+			- Now this application will work as eureka server application.
+			
+		- To create API Gateway application , Create Spring Boot Project and add dependency of 
+			1) Spring Cloud Gateway 
+			2) Eureka Discovery Client.
+		- To main class add "@EnableEurekaClient" annotation so this application becomes client to our eureka server.and add below properties
+			in application.property file
+			
+					server.port=8083
+					spring.application.name=API_Gateway
+					eureka.client.serviceUrl.defaultZone = http://localhost:8761/eureka
+					eureka.client.instance.preferIpAddress = true
+		
+		- using "eureka.client.serviceUrl.defaultZone" url , it will connect to that eureka server.
+		- We can provide routing configs inside application.properties of api gateway like this
+			
+				spring.cloud.gateway.routes[0].id=my_rest_app
+				spring.cloud.gateway.routes[0].uri=lb:my_rest_app
+				spring.cloud.gateway.routes[0].predicates[0] = Path=/restApp/**
+			
+		- So any request which have above mentioned "Path" then request will be redirected to given "uri" of "my_rest_app" microservice.
+			uri=lb:my_rest_app  - this will defined load balenced uri
+		- The same way we can provide n routes and n paths
+			
+			
+6) What is SOLID Design Principals ?
+
+	1) S : Single Responsibility Principle 
+	
+		- Each responsibility should be provided in Separate class ,like messages related methods in MessageService class.
+		- Twilio API can be used to send OTP's
+		
+	2) O : Open and Close Principle
+	
+		- Open for extension but close for modifications.
+	
+	3) L : Leskov's Substitution Principle
+		
+		- Derived classes must be completely substitutable for there base classes.
+		- We can create interfaces and implement needed interface , so Derived/child class is substitute to there base class
+		- Ex -  we have interface "SocialMedia" that have abstract method "sendMessage()" and "chatWithFriends()", so 
+			"Instagram" and "WhatsApp" class can implement this SocialMedia interface as This feature should be there in both classes.
+			So Instagram and WhatsApp classes follows Sustitution Principle.
+	
+	4) I : Interface Segregation Principle
+		
+		- Segregate interfaces depend on contracts.
+		- Segregate different interface methods with different interfaces , so it will not force to implement all the methods from single
+			interface.
+		- We can create different intefaces with different methods to be implemented and can implement only those interfaces which is required.
+	
+	5) D : Dependency Inversion Principle 
+	
+		- App should follow dependency inversion principle.
+		- Dependency should be injected runtime only using run time polymorphism , Should decide which class to inject based on reference
+			at runtime only.
+			
+		- We can use parent Interface or Parent class to hold the object of child's class. And at runtime can pass and assign dependency using 
+			parameterized constructor.
+		- So using this way we can assign any child class implementation , The class where we are implementing this dependency that itself 
+			will dont know which dependency will be implemented , because that will happen runtime. 
+ 			
 		

@@ -7,7 +7,7 @@ public class Car extends Vehicle {
 	public String airConditioner;
 	public String fridge;
 	public String entertainmentSystem;
-	
+
 	public Car() {
 		super();
 		this.steering = "Power Steering";
@@ -25,11 +25,12 @@ public class Car extends Vehicle {
 				+ ", fridge=" + fridge + ", entertainmentSystem=" + entertainmentSystem + ", engine=" + engine
 				+ ", wheels=" + wheels + ", seats=" + seats + ", fueTank=" + fueTank + ", lights=" + lights + "]";
 	}
-	
+
+	@Override
 	public void run() {
 		System.out.println("Running car");
 		//System.out.println(toString());
 		}
-	
-	
+
+
 }

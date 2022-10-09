@@ -12,7 +12,7 @@ package org.hrb.array;
 // Issues with Array
 // user once assigned any memory to the array cannot add or change the memory and append any other element to it.
 // Fixed-size , entries of an array must be of the same type ,
-// 
+//
 
 public class App {
 
@@ -26,12 +26,13 @@ public class App {
 		System.out.println(floatVariableArray[4]);
 
 		String[] stringArray = { "Chaand", "John", "Pooja", "Mia", "Salim" };
-		
+//		String[] stringArray = new String[]{ "Chaand", "John", "Pooja", "Mia", "Salim" };
+
 		// for loop for array
 		for (int i = 0; i <= stringArray.length - 1; i++) {
 			System.out.println(stringArray[i]);
 		}
-		
+
 		// for each loop of array
 		for(String name: stringArray){
 			System.out.println(name);

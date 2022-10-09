@@ -1,7 +1,7 @@
 package org.hrb;
 
 public class Processor {
-	
+
 	private String brand;
 	private String series;
 	private int generation;
@@ -22,7 +22,7 @@ public class Processor {
 		this.frequency = "2.5Ghz";
 		this.minFrequency = "2.5Ghz";
 		this.maxfrequency = "3.1Ghz";
-		
+
 	}
 
 	public Processor(String brand, String series, int generation, int cores, int threads, String cacheMemory,

@@ -1,6 +1,6 @@
 package org.hrb.nestedClasses;
 
-// The anonymous object simply means creating a new Object without assigning it to a reference. 
+// The anonymous object simply means creating a new Object without assigning it to a reference.
 // Hence this could be used only once in the execution of a program as it is not referenced to any object.
 // Java anonymous inner class can be created in two ways, it can be abstract or concrete.
 // The class that has no name and that is used to overwrite an interface or an abstract method is called an anonymous inner class.
@@ -13,9 +13,9 @@ package org.hrb.nestedClasses;
 
 
 class Door1{
-	
+
 	public boolean isLocked(String key) {
-		 
+
 		class Lock {
 			public boolean isLocked(String key) {
 				if (key.equals("qwerty")) {
@@ -29,17 +29,17 @@ class Door1{
 	}
 
 }
-public class AnonymousObject {   
+public class AnonymousObject {
     public static void main(String[] args) {
-		
+
 		//Door door = new Door();
-		
+
 		if(new Door1().isLocked("true")) {
 		System.out.println("Shop has closed, visit later");
 	}else{
 		System.out.println("Welcome, we are open :)");
 	}
-	
-		
+
+
 	}
 }

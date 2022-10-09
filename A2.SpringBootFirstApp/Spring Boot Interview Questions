@@ -74,11 +74,6 @@ Spring Boot Interview Questions
 					deletes a resource. It is used instead of using: @RequestMapping(method = RequestMethod.DELETE)
 	@PatchMapping: It maps the HTTP PATCH requests on the specific handler method. It is used instead of using: 
 					@RequestMapping(method = RequestMethod.PATCH)
-	@RequestBody: It is used to bind HTTP request with an object in a method parameter. Internally it uses HTTP MessageConverters to 
-				convert the body of the request. When we annotate a method parameter with @RequestBody, the Spring framework binds the 
-				incoming HTTP request body to that parameter.
-	@ResponseBody: It binds the method return value to the response body. It tells the Spring Boot Framework to serialize a return an object
-				 into JSON and XML format.
 	@PathVariable / @PathParam : It is used to extract the values from the URI. It is most suitable for the RESTful web service, where the URL contains a 
 				path variable. We can define multiple @PathVariable in a method.
 				@controller : @PathVariable
@@ -87,16 +82,38 @@ Spring Boot Interview Questions
 				web applications. It can specify default values if the query parameter is not present in the URL.
 	@RequestHeader: It is used to get the details about the HTTP request headers. We use this annotation as a method parameter. The optional
 				 elements of the annotation are name, required, value, defaultValue. For each detail in the header, we should specify separate annotations. We can use it multiple time in a method
+	@RequestBody: It is used to bind HTTP request with an object in a method parameter. Internally it uses HTTP MessageConverters to 
+				convert the body of the request. When we annotate a method parameter with @RequestBody, the Spring framework binds the 
+				incoming HTTP request body to that parameter.
+	@ResponseBody: It binds the method return value to the response body. It tells the Spring Boot Framework to serialize a return an object
+				 into JSON and XML format.
 	@RestController: It can be considered as a combination of @Controller and @ResponseBody annotations. The @RestController annotation is 
 				itself annotated with the @ResponseBody annotation. It eliminates the need for annotating each method with @ResponseBody.
 	@RequestAttribute: It binds a method parameter to request attribute. It provides convenient access to the request attributes from a 
 				controller method. With the help of @RequestAttribute annotation, we can access objects that are populated on the server-side.
 
 	------------------
-	1) @SpringBootApplication - Spring boot application startes with this annotated class.
-			@EnableAutoConfiguration, 
-			@ComponentScan and 
-			@SpringBootConfiguration
+	1) @SpringBootApplication - Spring boot application startes with this annotated class , used to mark main class of the appl
+	
+			@SpringBootConfiguration :
+				
+				- It can be used as an alternative to Spring’s standard @Configuration annotation so that configuration can be found automatically.
+				
+			@EnableAutoConfiguration :
+				
+				- This annotation auto-configures the beans that are present in the classpath.
+				- It simplifies the developer’s work by assuming the required beans from the classpath and configure it to run the application.
+				- For example, when we illustrate the spring-boot-starter-web dependency in the classpath, Spring boot auto-configures Tomcat, and Spring MVC.
+				- The package of the class declaring the @EnableAutoConfiguration annotation is considered as the default. 
+				- Therefore, we need to apply the @EnableAutoConfiguration annotation in the root package so that every sub-packages and class can be examined.
+				
+			@ComponentScan 	:
+				
+				- Scans the packages for configurations, controllers, services, and other components.
+				- @ComponentScan tells Spring in which packages you have annotated classes that should be managed by Spring. 
+				- Generally, @ComponentScan annotation is used with @Configuration annotation to specify the package for Spring to scan for components.
+				
+			
 	2) @RestController - define that class as controller  - use @PathParam
 		- IT is important annotation to implement a restfull API.
 		- It's a convenient annotation that combines @Controller and @ResponseBody, which eliminates the need to annotate every request handling
@@ -125,21 +142,400 @@ Spring Boot Interview Questions
 	5)  @GeneratedValue(strategy=GenerationType.AUTO) - auto increament value of id using hibernate entity
 
 
-12) Actuator :
+12) What is Spring Actuator :
 	
+	- Monitoring our app, gathering metrics, understanding traffic, or the state of our database become trivial with this dependency.
+	- Actuator is mainly used to expose operational information about the running application — health, metrics, info, dump, env, etc. It uses HTTP endpoints 
+		or JMX beans to enable us to interact with it.
+	
+	- To enable Spring Boot Actuator, we just need to add the spring-boot-actuator dependency to our package manager.
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
+		</dependency>
+	
+	There are three main features of Spring Boot Actuator:
+
+	1) Endpoints :
+		
+		- The actuator endpoints allows us to monitor and interact with the application. Spring Boot provides a number of built-in endpoints. We can also 
+			create our own endpoint.
+		- We can enable and disable each endpoint individually. Most of the application choose HTTP, where the Id of the endpoint, along with the prefix 
+			of /actuator, is mapped to a URL.
+		- For example, the /health endpoint provides the basic health information of an application. The actuator, by default, mapped it to /actuator/health.  
+		
+	2) Metrics :
+		
+		- Spring Boot Actuator provides dimensional metrics by integrating with the micrometer. The micrometer is integrated into Spring Boot.
+		- It provides vendor-neutral interfaces for timers, gauges, counters, distribution summaries, and long task timers with a dimensional data model.
+
+		
+	3) Audit :
+	
+		- Spring Boot provides a flexible audit framework that publishes events to an AuditEventRepository. It automatically publishes the authentication 
+			events if spring-security is in execution.
+
+
+13) How microservices communicate with each other ?
+
+	a) Using "RestTemplate" :
+	
+	- With the help of rest template we can invoke any rest service.
+	- RestTemplate have method "exchange" through which we can call another microservice
+		RestTemplate.exchange( URL , HttpMethod.GET , null , String.class (expectedOutFormat) )
+		RestTemplate.exchange( URL , HttpMethod.POST , dataObj , String.class (expectedOutFormat) )
+		
+		--------------------------------------------------------------------------------------------
+		// inside microservice 1
+		@Bean 
+		public RestTemplate getRestTemplate(){
+			return new RestTemplate();
+		}
+
+		@Autowired
+		RestTemplate restTemplate;
+		
+		@RequestMapping("/")
+		public String home(){
+			JSONObject json = new JSONObject();
+			json.put("message","Hello world!");
+			
+			JSONObject jsonObj = new JSONObject(restTemplate.exchange(
+											"https://localhost:4343",
+											HttpMethod.GET,
+											null,
+											String.class).getBody());
+			
+			json.put("message from another microservice",jsonObj);
+			
+			return json.toString();
+		}
+		--------------------------------------------------------------------------------------------
+		
+	- This above way , one microservice can communicate with other , If second microservice is not available then it will give "Unable to connect Error"
+
+	a) Using "WebClient" :
+		
+		
+		WebClient.builder webClientBuilder = WebClient.builder();
+		
+		String response = webClientBuilder.build()									// building instance of webClientBuilder
+											.get()									// get request
+											.uri("https://localhost:4343")			// target url
+											.retrieve();							// with this it will retrieve data asynchronously
+											.bodyToMono(String.class)				// convert response to given classl, mono means promise
+											.block();								// blocking execution till mono returns the data.
+			
+			
+	- WebClient offers support for both synchronous and asynchronous HTTP requests and streaming scenarios. Therefore, RestTemplate will be 
+		marked as deprecated in a future version of the Spring Framework and will not contain any new functionalities.
+
+
+	c) Feign Clients : refer below question.
+
+
+14) How To use feign client ? ( A2.SpringBootFirstApp - org.hrb.openFeign )
+
+	- To start with feign Client have to import openfeign-client dependency.
+	
+			# Spring Cloud Starter Feign (deprecated, please use spring-cloud-starter-openfeign)
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-openfeign</artifactId>
+				<version>3.1.4</version>
+			</dependency>
+
+	-  Annotate main class with "@EnableFeignClients"
+	
+			@SpringBootApplication
+			@EnableFeignClients
+			public class BlogApp {
+				public static void main(String[] args) {
+					SpringApplication.run(BlogApp.class, args);
+				}
+			}
+
+	- Create Interface and Annotatate that interface with @EnableFeignClient(URL,NAME)
+	
+			@FeignClient(url = "https://jsonplaceholder.typicode.com",name = "USER-CLIENT")
+			public interface FeignClient {
+			
+				// endpoint : https://jsonplaceholder.typicode.com/posts
+				@GetMapping("/posts")
+				public List<Posts> getPosts();
+			}
+			
+	- So with @EnableFeignClient we have to provide "url" and name.
+		- Url points to Client service base URL 
+		- name is the name or our service. 
+	- we can only use name if service registered in eureka , it will pick base url from eureka discovery.
+		
+	- Inside this interface we have to provide methods.with the mappings as we are doing in rest controllers , Those method declarations 
+		will work same as rest endpoints, This will call to "https://jsonplaceholder.typicode.com/posts" this endpoint.
+	
+	- We can pass parameters as a method paramters , it will use them while calling to client.
+			
+			public List<Posts> getPosts(@RequestParam("param") String paramName );
+		
+	- Now have to implement method inside "RestController" To get the users from this interface so we can call that method.
+	
+			@RestController
+			public class PostsController {
+				
+				@Autowired
+				FeignClientDemo feignClientDemo;
+				
+				// getting users using feign client 
+				@GetMapping("/getAllPosts")
+				public List<Posts> getAllPosts(){
+					return feignClientDemo.getPosts();
+				}
+			}
+	
+	- So now whenever This "/getAllPosts" endpoint is hit , then it will call "getPosts()" method of "feignClient" interface.
+		And that will call to the client endpoint of another microservice or another public API.
+
+
+15) Difference between feignClient and RestTemplate/WebClient ?
+
+	There are certain advantages of using feign Client
+
+	 - URLs are not hardcoded.We can use service names from registry.
+	 - you don't have to write unit test cases for feign as there is no code to test however you have to write integration tests.
+	 - we can use Eureka Client ID instead of the URL.
+	 - Feign handled the actual code.
+	 - Feign integrates with Ribbon and Eureka Automatically.
+	 - Feign provides a very easy way to call RESTful services.
+	 
+	- Feign client is Synchronous so it will block tread.We can not make asynchronous requests.
+
+	WebClient v/s feignClient :
+
+	- Spring WebClient is a non-blocking reactive client to make HTTP requests. Hence if you intend to use Spring Reactive Stream API to stream 
+		data asynchronously then this is the way to go. Think event-driven architecture. WebClient is part of the Spring WebFlux library.
+	- Feign is a declarative REST library that uses annotations based architecture with thread-per-request model. This means that the thread will
+		 block until the feign client receives the response. The problem with the blocking code is it must wait until the consuming thread 
+		 completes, hence think memory and CPU cycles.
+	- So use Spring WebClient when needing non-blocking HTTP requests otherwise Feign due to simple usage model.
+	- (Note: There is no reason as to why one cannot use WebClient for blocking operations but Feign is more mature and it’s annotation based 
+		model makes it easier)
 
 
 
+16) What is Hystrix circuit Breaker ?
+	
+	Ref : https://www.tutorialspoint.com/spring_cloud/spring_cloud_circuit_breaker_using_hystrix.htm#
+	
+	- Multilple services need to communicate with each other. The communication can either happen synchronously or asynchronously. When services communicate 
+		synchronously, there can be multiple reasons where things can break if 
+			- Callee service unavailable.
+			- Callee service taking time to respond.
+	- In such cases that generated exception can propogate upword and cause failure of that call , so here we can implement "circuit Breaker" so for time 
+		being we can respond back with default response untill that callee service becomes available again.
+	- So "circuit Breaking" can be implemented using "Netflix Hystrix" or "Resilince4j".
+	
+	To implement Hystrix :
+	- add "spring-cloud-starter-netflix-hystrix" dependency in pom.xml
+	
+			<dependency>
+			   <groupId>org.springframework.cloud</groupId>
+			   <artifactId>spring-cloud-starter-netflix-hystrix</artifactId>
+			   <version>2.7.0.RELEASE</version>
+			</dependency>
+			
+	- Then Annotate spring application with "@EnableHystrix"
+	
+			@SpringBootApplication
+			@EnableFeignClients
+			@EnableDiscoveryClient
+			@EnableHystrix
+			public class RestaurantService{
+			   public static void main(String[] args) {
+				  SpringApplication.run(RestaurantService.class, args);
+			   }
+			}
+			
+	- @EnableHystrix − This annotation scans our packages and looks out for methods which are using "@HystrixCommand" annotation.
+	- Now use "@HystrixCommand(fallbackMethod="DefaultMethod")" on mapped method and provide optional method in case of any fault.
+		
+			@RestController
+			@RequestMapping("/class")
+			class myController{
+				
+				@HystrixCommand(fallbackMethod="getDefaultResponse")
+				@RequestMapping(method=RequestMethod.GET,value="/getResponse")
+				public String getResponse(){
+					// Rest Template synchronous calls to other microservices, which might fail
+					// Calls to DB which might fail.
+					
+					return "Actual Response";
+				}
+				
+				public String getDefaultResponse(){
+					return "Default Response";
+				}
+			}
+			
+	- So whenever "getResponse" api fails because of some reasons , then Hystrix will forward it to "fallbackMethod" i.e "getDefaultResponse" and it 
+		will provide response for sometime until issues with dependant service resolved.
+	- Fallback method − We can specify the method we want to call when Hystrix determines that something is wrong with the callee. 
+	- The Fallback Method can response back with Deafult data or Cached Date.
 
 
+17) How to add swagger in our spring boot app ?
+
+	- To enable the Swagger2 in Spring Boot application, we need to add the following dependencies in our build configurations file.
+	
+			<dependency>
+			   <groupId>io.springfox</groupId>
+			   <artifactId>springfox-swagger2</artifactId>
+			   <version>2.7.0</version>
+			</dependency>
+			<dependency>
+			   <groupId>io.springfox</groupId>
+			   <artifactId>springfox-swagger-ui</artifactId>
+			   <version>2.7.0</version>
+			</dependency>
+	
+	- Now, add the @EnableSwagger2 annotation in your main Spring Boot application. The @EnableSwagger2 annotation is used to enable the 
+		Swagger2 for your Spring Boot application.
+	
+			@SpringBootApplication
+			@EnableSwagger2
+			public class SwaggerDemoApplication {
+			   public static void main(String[] args) {
+			      SpringApplication.run(SwaggerDemoApplication.class, args);
+			   }
+			}
+	
+	- create Docket Bean to configure Swagger2 for your Spring Boot application. We need to define the base package to configure REST API(s)
+		 for Swagger2.
+	- add this bean in main Spring Boot application class file itself and your main Spring Boot application class will look as shown below −
+	
+			@SpringBootApplication
+			@EnableSwagger2
+			public class SwaggerDemoApplication {
+			   public static void main(String[] args) {
+			      SpringApplication.run(SwaggerDemoApplication.class, args);
+			   }
+			   @Bean
+			   public Docket productApi() {
+			      return new Docket(DocumentationType.SWAGGER_2).select()
+			         .apis(RequestHandlerSelectors.basePackage("com.tutorialspoint.swaggerdemo")).build();
+			   }
+			}
+			
+	- Now, hit the URL in your web browser and see the Swagger API functionalities.
+		http://localhost:8080/swagger-ui.html
+			
+	
+18) Which Annotation is used to handle exception globally ?
+
+	@ControllerAdvice annotation used to handle exception globally.
+	
+	- The @ExceptionHandler is an annotation used to handle the specific exceptions and sending the custom responses to the client.
+	
+	
+19) How to add Job Scheduling to methods?
+
+	- Annotate main class with "@EnableScheduling"
+
+			@SpringBootApplication
+			@EnableScheduling
+			public class Application {
+				public static void main(String[] args) {
+					SpringApplication.run(Application.class, args);
+				}
+			}
+		
+	- To trigger a method using scheduler have to annotate method using @Scheduled(fixedRate = 3000)
+
+			@Scheduled(fixedRate = 3000)
+			public void methodEvery1Min() {	
+				System.out.println("Schedular for 1 min... ");
+				LOG.info("Schedular for 1 min... ");	
+			}
+		
+	- To trigger method using crons, we can use crons="0 * * * *" in @Scheduled(cron = "0/14 * * * * *")
+
+			@Scheduled(cron = "0/14 * * * * *")
+			public void methodEvery2Min() {
+				System.out.println("Schedular for 2 min... ");
+				LOG.info("Schedular for 2 min... ");
+			}
+
+	- @EnableScheduling we can add at main method , or with @Configuration 
+	
+			 @Configuration
+			 @EnableScheduling
+			 public class AppConfig {
+			     @Bean
+			     public MyTask task() {
+			         return new MyTask();
+			     }
+			 }
+			 
+	- Inside @Scheduled(fixedRate=2000) we have to arguments 
+		
+		1) fixedRate=2000   : 
+			
+			- This scheduling method will trigger job after every 2000 mili sec irrespective of previous job,work Asynchronously.
+			- will be triggered every 2000 mili sec. It will be triggered irrespective of previous scheduled processes.
+	
+	
+		2) fixedDealy=300   : 
+			
+			- This scheduling method will trigger job again only once previous execution have been completed , work Synchronously.
+			- will add 300 mili sec delay between 2 method execution.So next method execution will start after 300msec of first 
+				execution completed.
+		
+		3) cron = "* * * * * *"	 :
+		
+			- 1st * : seconds
+			- 2nd * : minuts
+			- 3rd * : hours
+			- 4th * : day of the month
+			- 5th * : month
+			- 6th * : day of the week
+			
+			ex : "0 0 20 * * TUE"  : every TUE at 8 pm
+			
+		4) cron in application.property file :
+		
+			@Scheduled(cron ="${cron.expression.value}")
+			public void methodEvery10Sec() {		
+				System.out.println("Schedular for 10 sec... ");
+				LOG.info("Schedular for 10 sec... ");
+			}
+		
+			// application.property
+			cron.expression.value = 0/10 * * * * *
+							
+	- We can use @Async annotation above task method , To enable async operation of that method , 
+		for that have to use @EnableAsync above main method.
+		It will use threads to complete each task. 		 
 
 
+20) What is stereotype annotations ?
 
-
-
-
-
-
-
+	- Spring Framework provides us with some special annotations. These annotations are used to create Spring beans automatically in the 
+		application context. 
+	- "@Component" annotation is the main Stereotype Annotation. 
+	- There are some Stereotype meta-annotations which is derived from @Component those are
+		
+		1) @Service :
+			- We specify a class with @Service to indicate that they’re holding the business logic. Besides being used in the service layer, 
+				there isn’t any other special use for this annotation. The utility classes can be marked as Service classes.
+			
+		2) @Repository :
+			- We specify a class with @Repository to indicate that they’re dealing with CRUD operations, usually, it’s used with DAO 
+				(Data Access Object) or Repository implementations that deal with database tables.
+			
+		3) @Controller :
+			- We specify a class with @Controller to indicate that they’re front controllers and responsible to handle user requests and return 
+				the appropriate response. It is mostly used with REST Web Services.
+	
+	- So the stereotype annotations in spring are @Component, @Service, @Repository, and @Controller.		
+			
 
 

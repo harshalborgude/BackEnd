@@ -1,7 +1,7 @@
 package org.hrb;
 
 public class Laptop {
-	
+
 	private float screen;
 	private Processor processor;
 	private String ram;
@@ -9,9 +9,9 @@ public class Laptop {
 	private GraphicsCard graphicsCard;
 	private String opticalDrive;
 	private String keyboard;
- 
+
 	public Laptop() {
- 
+
 		this.screen = 15.6f;
 		this.processor = new Processor();
 		this.ram = "DDR4";
@@ -20,7 +20,7 @@ public class Laptop {
 		this.opticalDrive = "MLT layer";
 		this.keyboard = "backlit";
 	}
- 
+
 	public Laptop(float screen, Processor processor, String ram, String hardDrive, GraphicsCard graphicsCard,
 			String opticalDrive, String keyboard) {
 		super();
@@ -93,7 +93,7 @@ public class Laptop {
 	public void setKeyboard(String keyboard) {
 		this.keyboard = keyboard;
 	}
-	
-	
+
+
 
 }

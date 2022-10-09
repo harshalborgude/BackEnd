@@ -1,11 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-16">
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre">
 		<attributes>
 			<attribute name="module" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="src" output="target/classes" path="src">
+		<attributes>
+			<attribute name="optional" value="true"/>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="30.MultiThreading"/>
 	<classpathentry kind="src" path="29.LambdaExpression"/>
 	<classpathentry kind="src" path="28.FileHandling"/>
@@ -23,7 +29,11 @@
 	<classpathentry kind="src" path="12.Final"/>
 	<classpathentry kind="src" path="13.Packages"/>
 	<classpathentry kind="src" path="14.ScopInJava"/>
-	<classpathentry kind="src" path="15.AccessModifier"/>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="15.AccessModifier">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="16.ExceptionHandling"/>
 	<classpathentry kind="src" path="17.Enum"/>
 	<classpathentry kind="src" path="18.Array"/>
@@ -37,7 +47,12 @@
 	<classpathentry kind="src" path="Stock"/>
 	<classpathentry kind="src" path="26.GarbageCollection"/>
 	<classpathentry kind="src" path="27.Comparator"/>
-	<classpathentry kind="src" path="31.Java8"/>
+	<classpathentry excluding="**" kind="src" output="target/classes" path="31.Java8">
+		<attributes>
+			<attribute name="maven.pomderived" value="true"/>
+		</attributes>
+	</classpathentry>
 	<classpathentry kind="src" path="32.SingletonAndSerialization"/>
-	<classpathentry kind="output" path="bin"/>
+	<classpathentry kind="src" path="33.JavaVersionsAndFeatures"/>
+	<classpathentry kind="output" path="target/classes"/>
 </classpath>

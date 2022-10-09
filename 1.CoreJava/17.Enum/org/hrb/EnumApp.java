@@ -6,11 +6,11 @@ package org.hrb;
 // Enum is default public static hence we can directly reference variable by Enum Name.
 
 public class EnumApp {
-	
+
 public static void main(String[] args) {
-		
+
 		Learning learn = Learning.COREJAVA;
-		
+
 		switch(learn){
 		case COLLECTIONS:
 			System.out.println("Step 2 : Learning Collections framework");
@@ -30,9 +30,9 @@ public static void main(String[] args) {
 		default:
 			System.out.println("Element not in the enumarated list");
 			break;
-		
+
 		}
-		
+
 	}
 
 }
@@ -41,5 +41,5 @@ public static void main(String[] args) {
 // defining enum independantly
  enum Learning {
 	COREJAVA,COLLECTIONS,GENERICS,JSPANDSERVLETS,MUILTITHREADING
-	
+
 }

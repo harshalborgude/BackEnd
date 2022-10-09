@@ -8,7 +8,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 // LinkedBlockingQueue
 // LinkedBlockingQueue is of dynamic size. It’s not required to provide size while creating LinkedBlockingQueue.
 // add() method is used to add data at the end of the queue
-// ArrayBlockingQueue 
+// ArrayBlockingQueue
 // Like Arrays, ArrayBlockingQueue is of fixed size.
 // Size of ArrayBlockingQueue should be provided as arguments while creating a queue.
 // add() method is used to add data at the end of the queue.
@@ -23,7 +23,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class QueueMap {
 
 	public static void main(String[] args) {
-		
+
 		// LinkedBlockingQueue
 		Queue<Integer> queue = new LinkedBlockingQueue<>();
 			queue.add(1);
@@ -32,11 +32,11 @@ public class QueueMap {
 			queue.add(4);
 			queue.add(5);
 			queue.offer(6); // will return true and false
-			
+
 		for(Integer element: queue){
 			System.out.println(element);
 		}
-		
+
 		// ArrayBlockingQueue
 		Queue<Integer> arrayQueue = new ArrayBlockingQueue<>(6);
 		arrayQueue.add(1);
@@ -45,11 +45,11 @@ public class QueueMap {
 		arrayQueue.add(4);
 		arrayQueue.add(5);
 		arrayQueue.add(6);
-		
+
 	for(Integer element: arrayQueue){
 		System.out.println(element);
 	}
-		
+
 	}
-	
+
 }

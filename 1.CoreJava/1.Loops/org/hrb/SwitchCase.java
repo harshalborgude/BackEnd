@@ -6,15 +6,15 @@ package org.hrb;
 // string cases are case sensitive so better to convert it into lower case.
 
 public class SwitchCase {
-	
+
 	public static void main(String[] args) {
-		/* INT 
+		/* INT
 		int x = 3;
 		switch (x) {
 		case 1:
 			System.out.println ("The value of x is 1");
 			break;
-		case 2: 
+		case 2:
 			System.out.println ("The value of x is 2");
 			break;
 		case 3:
@@ -24,7 +24,7 @@ public class SwitchCase {
 			System.out.println ("The value of x is other than 1, 2, 3");
 			break;
 		}*/
-		
+
 		/* Char
 		char x = 'a';
 		switch (x) {
@@ -44,10 +44,10 @@ public class SwitchCase {
 			System.out.println ("The value of x is other than a, b, c");
 			break;
 		}*/
-		
+
 		// String
 		String  name = "AUTHOR";
-		 
+
 		switch (name.toLowerCase()) {
 		case "author":
 			System.out.println("Chaand");
@@ -62,8 +62,8 @@ public class SwitchCase {
 			System.out.println("Invalid Entry");
 			break;
 		}
-		
-		
+
+
 	}
 
 }

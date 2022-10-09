@@ -2,8 +2,8 @@
 
 1) Java 8 Date/Time API (Java 8)
 2) Lambda Expressions (Java 8)
-3) Method References (Java 8)
-4) Functional Interfaces (Java 8)
+3) Method References (Java 8) 
+4) Functional Interfaces (Java 8) :
 5) Stream (Java 8) - collections , array , input output sources.
 	- where have to deal with large data to sort , map , filter etc , then stream api can be used.
 	- parallelStream will use multiple threads to do that task.

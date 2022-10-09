@@ -10,22 +10,22 @@ public class Predicate {
 
 		/*
 		 * IntPredicate lessThan18=new IntPredicate() {
-		 * 
-		 * @Override public boolean test(int value) { 
-		 * if(value<18) return true; 
+		 *
+		 * @Override public boolean test(int value) {
+		 * if(value<18) return true;
 		 * else
 		 * return false; }
-		 * 
+		 *
 		 * };
-		 * 
-		 */		
-		
+		 *
+		 */
+
 		IntPredicate lessThan18=i->i<18;
 		IntPredicate moreThan10=i->i>10;
-		
+
 		//System.out.println(lessThan18.test(20));
 		System.out.println(lessThan18.and(moreThan10).test(9));
-		
+
 	}
 
 }

@@ -7,18 +7,18 @@ public class Vehicle {
 	public int seats;
 	public int fueTank;
 	public String lights;
-	
+
 	public Vehicle() {
 		this.engine = "petrol";
 		this.wheels = 4;
 		this.seats = 4;
 		this.fueTank = 35;
 		this.lights = "LED";
- 
+
 	}
- 
+
 	public Vehicle(String engine, int wheels, int seats, int fuelTank, String lights) {
-		 
+
 		this.engine = engine;
 		this.wheels = wheels;
 		this.seats = seats;
@@ -65,7 +65,7 @@ public class Vehicle {
 	public void setLights(String lights) {
 		this.lights = lights;
 	}
-	
+
 	public void run() {
 		System.out.println( "Running vehicle");
 	}

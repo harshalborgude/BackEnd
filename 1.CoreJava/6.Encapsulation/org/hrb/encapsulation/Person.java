@@ -6,11 +6,11 @@ public class Person {
 	private String name;
 	private int age;
 	private String gender;
-		
+
 	public void setName(String name) {
 		this.name = name;
 	}
-	public boolean setAge(int age) { 
+	public boolean setAge(int age) {
 		if (age >=0 && age <=100){
 		this.age = age;
 		return true;

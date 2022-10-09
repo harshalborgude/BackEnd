@@ -8,7 +8,7 @@ package org.hrb;
 // default - Visible to the package only, the default. No modifiers are needed.
 
 public class Scope {
-	
+
 	/*
 	public static void main(String[] args) {
 		// i is a local variable which is limited for this method only.
@@ -18,16 +18,16 @@ public class Scope {
 		}
 		System.out.println("**********");
 		System.out.println(i);
-		
+
 		// i1 is the local variable which have scope inside the for loop only.
 		for (int i1 = 0; i1 < 6; i1++) {
 			System.out.println(i1);
 		}
 	}*/
-	
+
 	// static variable is a class variable , accessible throughout the class.
 	static int i = 100;
-	 
+
 	public static void main(String[] args) {
 		{
 			// this i is a local variable which is limited to this scope only.
@@ -36,5 +36,5 @@ public class Scope {
 		}
 		System.out.println("outside braces :"+i);
 	}
-	
+
 }
